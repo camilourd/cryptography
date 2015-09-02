@@ -14,13 +14,16 @@ public class AlphabetTest {
 	@Test
 	public void getIndexTest() {
 		for(char car = 'a'; car <= 'z'; ++car)
-			assert alphabet.getIndex(car) == (int)(car - 'a');
+			assertEquals(alphabet.getIndex(car), (int)(car - 'a'));
 	}
 	
 	@Test
 	public void getCharacterTest() {
-		for(int i = 0; i < 26; ++i)
-			assert alphabet.getCharacter(i) == ('a' + i);
+		for(int i = 0; i < 26; ++i) {
+			assertEquals(alphabet.getCharacter(i), 'a' + i);
+			assertEquals(alphabet.getCharacter(i + 10), 'a' + ((i + 10) % 26));
+			assertEquals(alphabet.getCharacter(-i - 1), 'z' - i);
+		}
 	}
 
 }

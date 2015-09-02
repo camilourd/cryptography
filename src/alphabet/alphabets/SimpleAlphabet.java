@@ -30,7 +30,12 @@ public class SimpleAlphabet implements Alphabet {
 	@Override
 	public char getCharacter(int index) {
 		int idx = index % cars.length();
-		return cars.charAt((idx < 0)? cars.length() - idx : idx);
+		return cars.charAt((idx < 0)? cars.length() + idx : idx);
+	}
+	
+	@Override
+	public String getCharacters() {
+		return this.cars;
 	}
 	
 }
