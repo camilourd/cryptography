@@ -1,5 +1,7 @@
 package alphabet.alphabets;
 
+import java.util.Arrays;
+
 import alphabet.Alphabet;
 
 public class SimpleAlphabet implements Alphabet {
@@ -8,14 +10,20 @@ public class SimpleAlphabet implements Alphabet {
 
 	public SimpleAlphabet(String cars) {
 		this.cars = cars.toCharArray();
+		Arrays.sort(this.cars);
 	}
 
 	@Override
 	public int getIndex(char car) {
-		for(int i = 0; i < cars.length; ++i)
-			if(car == cars[i])
-				return i;
-		return -1;
+		int low = 0, high = cars.length, mid;
+		while(low < high) {
+			mid = (low + high) >> 1;
+			if(cars[mid] < car)
+				low = mid + 1;
+			else
+				high = mid;
+		}
+		return (cars[low] == car)? low : -1;
 	}
 
 	@Override

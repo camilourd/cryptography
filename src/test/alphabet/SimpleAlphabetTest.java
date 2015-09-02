@@ -21,6 +21,7 @@ public class SimpleAlphabetTest {
 	public void getIndexTest() {
 		for(int i = 0; i < cars.length; ++i)
 			assertEquals(alphabet.getIndex(cars[i]), i);
+		assertEquals(alphabet.getIndex('.'), -1);
 	}
 	
 	@Test
