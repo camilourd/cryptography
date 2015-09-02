@@ -27,7 +27,8 @@ public class SimpleAlphabet implements Alphabet {
 
 	@Override
 	public char getCharacter(int index) {
-		return cars.charAt(index);
+		int idx = index % cars.length();
+		return cars.charAt((idx < 0)? cars.length() - idx : idx);
 	}
 	
 }
