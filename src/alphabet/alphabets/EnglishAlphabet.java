@@ -1,4 +1,4 @@
-package alphabet;
+package alphabet.alphabets;
 
 public class EnglishAlphabet extends SimpleAlphabet {
 

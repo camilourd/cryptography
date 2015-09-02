@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import alphabet.Alphabet;
-import alphabet.EnglishAlphabet;
+import alphabet.alphabets.EnglishAlphabet;
 
 public class AlphabetTest {
 

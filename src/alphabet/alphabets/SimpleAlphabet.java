@@ -1,6 +1,8 @@
-package alphabet;
+package alphabet.alphabets;
 
 import java.util.Arrays;
+
+import alphabet.Alphabet;
 
 public class SimpleAlphabet implements Alphabet {
 	
