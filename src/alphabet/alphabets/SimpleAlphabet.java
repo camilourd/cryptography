@@ -1,40 +1,31 @@
 package alphabet.alphabets;
 
-import java.util.Arrays;
-
 import alphabet.Alphabet;
 
 public class SimpleAlphabet implements Alphabet {
 	
-	protected String cars;
+	protected char[] cars;
 
 	public SimpleAlphabet(String cars) {
-		char[] aux = cars.toCharArray();
-		Arrays.sort(aux);
-		this.cars = new String(aux);
+		this.cars = cars.toCharArray();
 	}
 
 	@Override
 	public int getIndex(char car) {
-		int low = 0, high = cars.length(), mid;
-		while(low < high) {
-			mid = (low + high) >> 1;
-			if(cars.charAt(mid) < car)
-				low = mid + 1;
-			else
-				high = mid;
-		}
-		return low;
+		for(int i = 0; i < cars.length; ++i)
+			if(car == cars[i])
+				return i;
+		return -1;
 	}
 
 	@Override
 	public char getCharacter(int index) {
-		int idx = index % cars.length();
-		return cars.charAt((idx < 0)? cars.length() + idx : idx);
+		int idx = index % cars.length;
+		return cars[(idx < 0)? cars.length + idx : idx];
 	}
 	
 	@Override
-	public String getCharacters() {
+	public char[] getCharacters() {
 		return this.cars;
 	}
 	
