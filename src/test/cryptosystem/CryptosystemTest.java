@@ -19,5 +19,5 @@ public abstract class CryptosystemTest {
 	public abstract void encodeTest();
 	@Test
 	public abstract void decodeTest();
-
+	
 }
