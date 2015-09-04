@@ -3,12 +3,8 @@ package test.cryptosystem.ciphers;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.Test;
 
-import alphabet.Alphabet;
 import alphabet.alphabets.EnglishAlphabet;
-import cryptosystem.Cryptosystem;
-import cryptosystem.ciphers.CaesarCipher;
 import cryptosystem.ciphers.SimpleSubstitutionCipher;
 import substitution.Substitution;
 import test.cryptosystem.CryptosystemTest;
