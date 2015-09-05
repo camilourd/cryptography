@@ -5,5 +5,6 @@ public interface Alphabet {
 	public int getIndex(char car);
 	public char getCharacter(int index);
 	public char[] getCharacters();
+	public int size();
 	
 }

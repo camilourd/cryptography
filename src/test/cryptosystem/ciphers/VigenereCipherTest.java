@@ -16,19 +16,13 @@ public class VigenereCipherTest extends CryptosystemTest {
 	}
 
 	@Override
-	public void encodeTest() {
+	public void encodeDecodeTest() {
 		String message = "thisisasimpletest";
 		String key = "thisakey";
 		String output = ((VigenereCipher)cryptosystem).encode(key, message);
+		
 		for(int i = 0; i < message.length(); ++i)
 			assertEquals(output.charAt(i), alphabet.getCharacter(alphabet.getIndex(message.charAt(i)) + alphabet.getIndex(key.charAt(i % key.length()))));
-	}
-
-	@Override
-	public void decodeTest() {
-		String message = "thisisasimpletest";
-		String key = "thisakey";
-		String output = ((VigenereCipher)cryptosystem).encode(key, message);			
 	    assertEquals(message, ((VigenereCipher)cryptosystem).decode(key, output));
 	}
 	

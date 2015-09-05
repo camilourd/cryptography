@@ -20,21 +20,12 @@ public class CaesarCipherTest extends CryptosystemTest {
 	}
 
 	@Override
-	public void encodeTest() {
+	public void encodeDecodeTest() {
 		String message = "thisisatest";
 		
 		for(Integer shift: shifts) {
 			String output = ((CaesarCipher)cryptosystem).encode(shift, message);
 			testEquality(message, output, shift);
-		}
-	}
-
-	@Override
-	public void decodeTest() {
-		String message = "thisisatest";
-		
-		for(Integer shift: shifts) {
-			String output = ((CaesarCipher)cryptosystem).encode(shift, message);			
 			assertEquals(message, ((CaesarCipher)cryptosystem).decode(shift, output));
 		}
 	}

@@ -26,17 +26,11 @@ public class SimpleSubstitutionCipherTest extends CryptosystemTest {
 	}
 
 	@Override
-	public void encodeTest() {
+	public void encodeDecodeTest() {
 		String message = "thisisatest";
 		String output = ((SimpleSubstitutionCipher)cryptosystem).encode(substitution, message);
 		for(int i = 0; i < message.length(); ++i)
 			assertEquals(output.charAt(i), substitution.substitute(message.charAt(i)).charValue());
-	}
-
-	@Override
-	public void decodeTest() {
-		String message = "thisisatest";
-		String output = ((SimpleSubstitutionCipher)cryptosystem).encode(substitution, message);			
 	    assertEquals(message, ((SimpleSubstitutionCipher)cryptosystem).decode(substitution, output));
 	}
 

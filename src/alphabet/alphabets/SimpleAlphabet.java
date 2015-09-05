@@ -3,6 +3,7 @@ package alphabet.alphabets;
 import java.util.Arrays;
 
 import alphabet.Alphabet;
+import tools.ModularArithmetic;
 
 public class SimpleAlphabet implements Alphabet {
 	
@@ -28,13 +29,17 @@ public class SimpleAlphabet implements Alphabet {
 
 	@Override
 	public char getCharacter(int index) {
-		int idx = index % cars.length;
-		return cars[(idx < 0)? cars.length + idx : idx];
+		return cars[ModularArithmetic.modulo(index, cars.length)];
 	}
 	
 	@Override
 	public char[] getCharacters() {
 		return this.cars;
+	}
+
+	@Override
+	public int size() {
+		return cars.length;
 	}
 	
 }

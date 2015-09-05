@@ -8,7 +8,8 @@ public class EnglishAlphabet extends SimpleAlphabet {
 	
 	@Override
 	public int getIndex(char car) {
-		return car - 'a';
+		int index = car - 'a';
+		return (index < 0)? -1 : index;
 	}
 
 }
