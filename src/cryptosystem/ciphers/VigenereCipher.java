@@ -25,4 +25,9 @@ public class VigenereCipher extends Cryptosystem<String, String> {
 		return new String(result);
 	}
 
+	@Override
+	public boolean isValidKey(String key) {
+		return key.length() > 0;
+	}
+
 }

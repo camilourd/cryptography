@@ -26,4 +26,12 @@ public class SimpleSubstitutionCipher extends Cryptosystem<Substitution<Characte
 		return new String(result);
 	}
 
+	@Override
+	public boolean isValidKey(Substitution<Character, Character> key) {
+		for(int i = 0; i < alphabet.size(); ++i)
+			if(key.substitute(alphabet.getCharacter(i)) == null)
+				return false;
+		return true;
+	}
+
 }

@@ -25,4 +25,9 @@ public class CaesarCipher extends Cryptosystem<Integer, String> {
 		return new String(result);
 	}
 
+	@Override
+	public boolean isValidKey(Integer key) {
+		return true;
+	}
+
 }

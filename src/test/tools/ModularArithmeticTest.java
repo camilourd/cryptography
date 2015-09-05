@@ -2,7 +2,6 @@ package test.tools;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import tools.ModularArithmetic;
@@ -17,7 +16,5 @@ public class ModularArithmeticTest {
 		assertEquals(15, ModularArithmetic.modInverse(7, 26));
 		assertEquals(4, ModularArithmetic.modInverse(21, 27));
 	}
-	
-	
 
 }

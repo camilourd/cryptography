@@ -2,7 +2,6 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import alphabet.alphabets.EnglishAlphabet;
@@ -10,7 +9,6 @@ import cryptosystem.ciphers.AffineCipher;
 import cryptosystem.types.Pair;
 import test.cryptosystem.CryptosystemTest;
 import tools.Arithmetic;
-import tools.ModularArithmetic;
 
 public class AffineCipherTest extends CryptosystemTest {
 

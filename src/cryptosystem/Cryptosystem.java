@@ -9,5 +9,7 @@ public abstract class Cryptosystem<K, M> implements CipherFunction<K, M> {
 	public Cryptosystem(Alphabet alphabet) {
 		this.alphabet = alphabet;
 	}
+	
+	public abstract boolean isValidKey(K key);
 
 }
