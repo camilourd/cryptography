@@ -15,7 +15,7 @@ public class RSATest  extends CryptosystemTest {
 	@Override
 	public void encodeDecodeTest() {
 		
-		String message = "thisisasimpletest";
+		String message = "testingrsacryptosystem";
 		RSA.Key key = new RSA.Key(BigInteger.valueOf(509), BigInteger.valueOf(673), BigInteger.valueOf(29));
 		String output = ((RSA)cryptosystem).encode(key, message);
 		assert(message.startsWith(((RSA)cryptosystem).decode(key, output)));		

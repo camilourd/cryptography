@@ -92,7 +92,8 @@ public class RSA extends Cryptosystem<RSA.Key, String> {
 
 	private String pad(String str, int len) {
 		
-		while (str.length()%len != 0) {
+		int r = str.length()%len;
+		for (; r-- > 0; ) {
 			str = "0"+str;
 		}
 		return str;
