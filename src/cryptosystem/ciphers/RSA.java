@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 import alphabet.Alphabet;
-import alphabet.alphabets.EnglishAlphabet;
 import cryptosystem.Cryptosystem;
 
 public class RSA extends Cryptosystem<RSA.Key, String> {

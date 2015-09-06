@@ -25,7 +25,7 @@ public class AffineCipher extends Cryptosystem<Pair<Integer, Integer>, String> {
 	public String decode(Pair<Integer, Integer> key, String message) {
 		char[] result = message.toCharArray();
 		if(isValidKey(key)) {
-			int inverse = ModularArithmetic.modInverse(key.first, alphabet.size());
+			int inverse = ModularArithmetic.multiplicativeInverse(key.first, alphabet.size());
 			for(int i = 0; i < result.length; ++i)
 				result[i] = alphabet.getCharacter(inverse * (alphabet.getIndex(result[i]) - key.second));
 		}

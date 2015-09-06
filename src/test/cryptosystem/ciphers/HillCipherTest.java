@@ -11,7 +11,6 @@ public class HillCipherTest extends CryptosystemTest {
 
 	public HillCipherTest() {
 		super(new HillCipher(new EnglishAlphabet()), new EnglishAlphabet());
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

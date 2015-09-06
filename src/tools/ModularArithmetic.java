@@ -2,7 +2,7 @@ package tools;
 
 public class ModularArithmetic {
 
-	public static int modInverse(int a, int n) {
+	public static int multiplicativeInverse(int a, int n) {
 		int b = n, d = 1, r = 1, p0 = 0, p1 = 1;
 		for(int i = 0; r > 0; ++i) {
 			if(i > 1) {
@@ -22,5 +22,17 @@ public class ModularArithmetic {
 		a = a % n;
 		return (a < 0)? n + a : a;
 	}
-
+	
+	public static int pow(int base, int exp, int modulus) {
+		int result = 1;
+		base %= modulus;
+		while(exp > 0) {
+			if((exp & 1) == 1)
+				result = (result * base) % modulus;
+			exp >>= 1;
+			base = (base * base) % modulus;
+		}
+		return result;
+	}
+	
 }

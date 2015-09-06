@@ -24,7 +24,7 @@ public class HillCipher extends Cryptosystem<Matrix, String> {
 	public String decode(Matrix key, String message) {
 		char[] result = message.toCharArray();
 		if(isValidKey(key)) {
-			int inv = ModularArithmetic.modInverse((int) key.determinant(), alphabet.size());
+			int inv = ModularArithmetic.multiplicativeInverse((int) key.determinant(), alphabet.size());
 			matrixEncode(key.cofactor().times((double) inv).transpose(), result);
 		}
 		return new String(result);
