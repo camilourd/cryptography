@@ -42,7 +42,6 @@ public class RSA extends Cryptosystem<RSA.Key, String> {
 				block += pad(alphabet.getIndex(input[i+j])+"", characterLength);
 			}
 			block = new BigInteger(block).modPow(e, n).toString();
-			block = pad(block, characterLength*blockSize);
 			output += block+" ";
 		}
 		return new String(output);
