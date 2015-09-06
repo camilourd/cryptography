@@ -44,7 +44,7 @@ public class RSA extends Cryptosystem<RSA.Key, String> {
 			block = new BigInteger(block).modPow(e, n).toString();
 			output += block+" ";
 		}
-		return new String(output);
+		return output;
 	}
 
 	@Override
