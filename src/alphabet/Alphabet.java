@@ -1,10 +1,9 @@
 package alphabet;
 
-public interface Alphabet {
+public abstract class Alphabet<T> {
 	
-	public int getIndex(char car);
-	public char getCharacter(int index);
-	public char[] getCharacters();
-	public int size();
-	
+	public abstract int getIndex(T val);
+	public abstract T getValue(int idx);
+	public abstract T[] getValues();
+	public abstract int getSize();
 }

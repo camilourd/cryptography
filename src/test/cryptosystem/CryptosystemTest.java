@@ -7,12 +7,10 @@ import cryptosystem.Cryptosystem;
 
 public abstract class CryptosystemTest {
 
-	protected Alphabet alphabet;
-	protected Cryptosystem<?, ?> cryptosystem;
+	protected Cryptosystem<?, ?, ?> cryptosystem;
 	
-	public CryptosystemTest(Cryptosystem<?, ?> cryptosystem, Alphabet alphabet) {
+	public CryptosystemTest(Cryptosystem<?, ?, ?> cryptosystem) {
 		this.cryptosystem = cryptosystem;
-		this.alphabet = alphabet;
 	}
 	
 	@Test

@@ -19,8 +19,11 @@ public class ModularArithmetic {
 	}
 	
 	public static int modulo(int a, int n) {
-		a = a % n;
-		return (a < 0)? n + a : a;
+		
+		if (a < 0) {
+			return a+n*(-a/n)+n;
+		}
+		return a%n;
 	}
 	
 	public static int pow(int base, int exp, int modulus) {
