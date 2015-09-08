@@ -1,11 +1,11 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
 import java.lang.reflect.Array;
 
-import alphabet.Alphabet;
-import cryptosystem.types.Pair;
-import tools.Arithmetic;
-import tools.ModularArithmetic;
+import edu.unal.crypto.alphabet.Alphabet;
+import edu.unal.crypto.tools.Arithmetic;
+import edu.unal.crypto.tools.ModularArithmetic;
+import edu.unal.crypto.types.Pair;
 
 public class Affine<P> extends Cryptosystem<P, P, Pair<Integer, Integer>> {
 

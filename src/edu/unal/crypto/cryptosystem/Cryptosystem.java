@@ -1,6 +1,6 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
-import alphabet.Alphabet;
+import edu.unal.crypto.alphabet.Alphabet;
 
 public abstract class Cryptosystem<P, C, K> implements Cipher<P, C, K> {
 	

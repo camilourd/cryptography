@@ -1,4 +1,4 @@
-package tools;
+package edu.unal.crypto.tools;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;

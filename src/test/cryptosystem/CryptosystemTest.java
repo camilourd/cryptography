@@ -2,8 +2,7 @@ package test.cryptosystem;
 
 import org.junit.Test;
 
-import alphabet.Alphabet;
-import cryptosystem.Cryptosystem;
+import edu.unal.crypto.cryptosystem.*;
 
 public abstract class CryptosystemTest {
 

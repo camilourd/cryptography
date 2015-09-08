@@ -6,11 +6,10 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
-import alphabet.LowerCaseEnglish;
-import cryptosystem.Affine;
-import cryptosystem.types.Pair;
-import tools.Arithmetic;
-import tools.CharStream;
+import edu.unal.crypto.alphabet.*;
+import edu.unal.crypto.cryptosystem.*;
+import edu.unal.crypto.tools.CharStream;
+import edu.unal.crypto.types.Pair;
 
 public class AffineCipherTest extends CryptosystemTest {
 

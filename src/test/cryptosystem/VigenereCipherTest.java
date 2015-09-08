@@ -2,9 +2,9 @@ package test.cryptosystem;
 
 import static org.junit.Assert.*;
 
-import alphabet.LowerCaseEnglish;
-import cryptosystem.Vigenere;
-import tools.CharStream;
+import edu.unal.crypto.alphabet.*;
+import edu.unal.crypto.cryptosystem.*;
+import edu.unal.crypto.tools.CharStream;
 
 public class VigenereCipherTest extends CryptosystemTest {
 
@@ -25,6 +25,5 @@ public class VigenereCipherTest extends CryptosystemTest {
 		Character[] secret = algo.decrypt(key, output);
 		
 		assertEquals(CharStream.equals(input, secret), true);
-	}
-	
+	}	
 }

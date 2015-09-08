@@ -2,9 +2,9 @@ package test.cryptosystem;
 
 import static org.junit.Assert.*;
 
-import alphabet.LowerCaseEnglish;
-import cryptosystem.Substitution;
-import tools.CharStream;
+import edu.unal.crypto.alphabet.*;
+import edu.unal.crypto.cryptosystem.*;
+import edu.unal.crypto.tools.CharStream;
 
 public class SimpleSubstitutionCipherTest extends CryptosystemTest {
 

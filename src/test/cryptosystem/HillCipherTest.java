@@ -2,10 +2,10 @@ package test.cryptosystem;
 
 import static org.junit.Assert.*;
 
-import alphabet.LowerCaseEnglish;
-import cryptosystem.Hill;
+import edu.unal.crypto.alphabet.*;
+import edu.unal.crypto.cryptosystem.*;
+import edu.unal.crypto.tools.CharStream;
 import flanagan.math.Matrix;
-import tools.CharStream;
 
 public class HillCipherTest extends CryptosystemTest {
 

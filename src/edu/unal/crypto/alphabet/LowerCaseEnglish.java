@@ -1,4 +1,4 @@
-package alphabet;
+package edu.unal.crypto.alphabet;
 
 public class LowerCaseEnglish extends Alphabet<Character> {
 

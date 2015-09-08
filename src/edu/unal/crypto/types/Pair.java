@@ -1,4 +1,4 @@
-package cryptosystem.types;
+package edu.unal.crypto.types;
 
 public class Pair<X, Y> {
 	

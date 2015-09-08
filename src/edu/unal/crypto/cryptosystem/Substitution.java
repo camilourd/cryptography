@@ -1,10 +1,10 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
 import java.lang.reflect.Array;
 import java.util.TreeMap;
 
-import alphabet.Alphabet;
-import cryptosystem.types.Function;
+import edu.unal.crypto.alphabet.Alphabet;
+import edu.unal.crypto.types.Function;
 
 public class Substitution<P, C> extends Cryptosystem<P, C, Substitution.Key<P, C>> {
 

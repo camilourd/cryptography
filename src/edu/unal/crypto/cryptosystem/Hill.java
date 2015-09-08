@@ -1,11 +1,11 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
 import java.util.Arrays;
 
-import alphabet.Alphabet;
+import edu.unal.crypto.alphabet.Alphabet;
+import edu.unal.crypto.tools.Arithmetic;
+import edu.unal.crypto.tools.ModularArithmetic;
 import flanagan.math.Matrix;
-import tools.Arithmetic;
-import tools.ModularArithmetic;
 
 public class Hill<P> extends Cryptosystem<P, P, Matrix> {
 

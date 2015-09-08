@@ -1,4 +1,4 @@
-package alphabet;
+package edu.unal.crypto.alphabet;
 
 public class ASCII extends Alphabet<Character> {
 

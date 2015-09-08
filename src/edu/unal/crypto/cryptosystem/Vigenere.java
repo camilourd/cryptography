@@ -1,9 +1,9 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
 import java.lang.reflect.Array;
 
-import alphabet.Alphabet;
-import tools.ModularArithmetic;
+import edu.unal.crypto.alphabet.Alphabet;
+import edu.unal.crypto.tools.ModularArithmetic;
 
 public class Vigenere<P> extends Cryptosystem<P, P, P[]> {
 

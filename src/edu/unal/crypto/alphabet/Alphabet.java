@@ -1,4 +1,4 @@
-package alphabet;
+package edu.unal.crypto.alphabet;
 
 public abstract class Alphabet<T> {
 	

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigInteger;
 
-import alphabet.LowerCaseEnglish;
-import cryptosystem.RSA;
-import tools.CharStream;
+import edu.unal.crypto.alphabet.*;
+import edu.unal.crypto.cryptosystem.*;
+import edu.unal.crypto.tools.CharStream;
 
 public class RSATest  extends CryptosystemTest {
 

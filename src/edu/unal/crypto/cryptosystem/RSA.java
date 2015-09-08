@@ -1,4 +1,4 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import alphabet.Alphabet;
+import edu.unal.crypto.alphabet.Alphabet;
 
 public class RSA<P> extends Cryptosystem<P, BigInteger, RSA.Key> {
 

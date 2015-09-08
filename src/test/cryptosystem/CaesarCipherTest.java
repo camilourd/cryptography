@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import alphabet.LowerCaseEnglish;
-import cryptosystem.Caesar;
-import tools.CharStream;
+import edu.unal.crypto.alphabet.*;
+import edu.unal.crypto.cryptosystem.*;
+import edu.unal.crypto.tools.CharStream;
 
 public class CaesarCipherTest extends CryptosystemTest {
 	

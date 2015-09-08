@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import tools.ModularArithmetic;
+import edu.unal.crypto.tools.ModularArithmetic;
 
 public class ModularArithmeticTest {
 

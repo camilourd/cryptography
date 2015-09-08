@@ -1,4 +1,4 @@
-package cryptosystem;
+package edu.unal.crypto.cryptosystem;
 
 public interface Cipher<P, C, K> {
 

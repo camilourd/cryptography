@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import tools.Arithmetic;
+import edu.unal.crypto.tools.Arithmetic;
 
 public class ArithmeticTest {
 
