@@ -25,13 +25,9 @@ public class ModularArithmetic {
 	
 	public static int pow(int base, int exp, int modulus) {
 		int result = 1;
-		base %= modulus;
-		while(exp > 0) {
+		for(base %= modulus; exp > 0; exp >>= 1, base = (base * base) % modulus)
 			if((exp & 1) == 1)
 				result = (result * base) % modulus;
-			exp >>= 1;
-			base = (base * base) % modulus;
-		}
 		return result;
 	}
 	
