@@ -20,7 +20,10 @@ public class DESSubstitution implements SubstitutionFunction<BitArray, BitArray>
 
 	@Override
 	public BitArray restore(BitArray value) {
-		return value;
+		BitArray result = (BitArray) value.clone();
+		for(int i = 0;i < replacements.length; ++i)
+			result.set(replacements[i], value.get(i));
+		return result;
 	}
 
 }

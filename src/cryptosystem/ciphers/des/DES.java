@@ -1,7 +1,5 @@
 package cryptosystem.ciphers.des;
 
-import java.security.ProtectionDomain;
-
 import unalcol.types.collection.bitarray.BitArray;
 
 public class DES {
@@ -104,20 +102,37 @@ public class DES {
 	        21, 10, 3,  24
 		});
 	
-	public static BitArray encode(BitArray key, BitArray message) {
+	public static BitArray encrypt(BitArray key, BitArray message) {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
 			output = IP.substitute(output);
 			BitArray[] parts = DESGenerator.divide(2, output);
-			for(int i = 0; i < subkeys.length; ++i) {
-				BitArray previous_left = parts[0];
-				parts[0] = parts[1];
-				parts[1] = feistel(parts[1], subkeys[i]);
-				parts[1].xor(previous_left);
-			}
+			for(int i = 0; i < subkeys.length; ++i)
+				calculateNewParts(subkeys, parts, i);
 			swap(parts);
 			output = FP.substitute(join(parts[0], parts[1]));
+		}
+		return output;
+	}
+
+	private static void calculateNewParts(BitArray[] subkeys, BitArray[] parts, int i) {
+		BitArray previous_left = parts[0];
+		parts[0] = parts[1];
+		parts[1] = feistel(parts[1], subkeys[i]);
+		parts[1].xor(previous_left);
+	}
+	
+	public static BitArray decrypt(BitArray key, BitArray message) {
+		BitArray output = (BitArray) message.clone();
+		if(isFeasible(key, message)) {
+			BitArray[] subkeys = DESGenerator.generateKeys(key);
+			output = FP.restore(output);
+			BitArray[] parts = DESGenerator.divide(2, output);
+			for(int i = subkeys.length - 1; i >= 0 ; --i)
+				calculateNewParts(subkeys, parts, i);
+			swap(parts);
+			output = IP.restore(join(parts[0], parts[1]));
 		}
 		return output;
 	}

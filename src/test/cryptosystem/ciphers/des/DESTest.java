@@ -22,9 +22,12 @@ public class DESTest {
 
 	@Test
 	public void test() {
-		BitArray result = DES.encode(key, input);
+		BitArray result = DES.encrypt(key, input);
 		for(int i = 0; i < output.size(); ++i)
 			assertEquals(output.get(i), result.get(i));
+		result = DES.decrypt(key, result);
+		for(int i = 0; i < input.size(); ++i)
+			assertEquals(input.get(i), result.get(i));
 	}
 
 }
