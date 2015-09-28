@@ -12,4 +12,8 @@ public abstract class Cryptosystem<K, M> implements CipherFunction<K, M> {
 	
 	public abstract boolean isValidKey(K key);
 
+	public Alphabet getAlphabet() {
+		return alphabet;
+	}
+
 }
