@@ -2,13 +2,7 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import alphabet.Alphabet;
 import alphabet.alphabets.DESAlphabet;
-import cryptosystem.Cryptosystem;
-import cryptosystem.ciphers.DESCipher;
 import cryptosystem.ciphers.TripleDES;
 import test.cryptosystem.CryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;

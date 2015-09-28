@@ -25,5 +25,9 @@ public class DESSubstitution implements SubstitutionFunction<BitArray, BitArray>
 			result.set(replacements[i], value.get(i));
 		return result;
 	}
+	
+	public int size() {
+		return replacements.length;
+	}
 
 }
