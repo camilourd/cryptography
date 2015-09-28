@@ -1,17 +1,17 @@
 package cryptosystem.ciphers;
 
-import alphabet.alphabets.SimpleAlphabet;
+import alphabet.alphabets.DESAlphabet;
 import cryptosystem.Cryptosystem;
 import unalcol.types.collection.bitarray.BitArray;
 import cryptosystem.ciphers.des.DES;
 
 public class DESCipher extends Cryptosystem<BitArray, String> {
 
-	public final static int ENCRYPTION_MODE = 1;
-	public final static int DECRYPTION_MODE = 2;
+	public final static int ENCRYPT = 1;
+	public final static int DECRYPT = 2;
 	
 	public DESCipher() {
-		super(new SimpleAlphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*/=<>: .,;"));
+		super(new DESAlphabet());
 	}
 
 	@Override
@@ -19,18 +19,18 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		if(isValidKey(key)) {
 			while((message.length() * 6) % 64 > 0)
 				message += alphabet.getCharacter((int)(Math.random() * alphabet.size()));
-			return runDES(ENCRYPTION_MODE, key, message);
+			return runDES(ENCRYPT, key, message);
 		}
 		return message;
 	}
 
-	private String runDES(int mode, BitArray key, String message) {
+	private String runDES(int method, BitArray key, String message) {
 		char[] result = message.toCharArray();
 		BitArray code = new BitArray(0, false), save = new BitArray(0, false);
 		for(int i = 0, j = 0; i < result.length; ++i) {
 			code.add(ParseBitArray(result[i]));
 			if(code.size() >= 64) {
-				save.add(runMode(mode, key, code.subBitArray(0, 64)));
+				save.add(runMode(method, key, code.subBitArray(0, 64)));
 				
 				int n = save.size() / 6;
 				for(int k = 0; k < n; ++k)
@@ -43,8 +43,8 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		return new String(result);
 	}
 
-	private BitArray runMode(int mode, BitArray key, BitArray code) {
-		if(mode == ENCRYPTION_MODE)
+	private BitArray runMode(int method, BitArray key, BitArray code) {
+		if(method == ENCRYPT)
 			return DES.encrypt(key, code);
 		return DES.decrypt(key, code);
 	}
@@ -67,7 +67,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	@Override
 	public String decode(BitArray key, String message) {
 		if(isValidKey(key))
-			return runDES(DECRYPTION_MODE ,key, message);
+			return runDES(DECRYPT ,key, message);
 		return message;
 	}
 
@@ -75,7 +75,5 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	public boolean isValidKey(BitArray key) {
 		return key.size() == 64;
 	}
-	
-	
 
 }

@@ -2,7 +2,7 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import alphabet.alphabets.SimpleAlphabet;
+import alphabet.alphabets.DESAlphabet;
 import cryptosystem.ciphers.DESCipher;
 import test.cryptosystem.CryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;
@@ -12,7 +12,7 @@ public class DESCipherTest extends CryptosystemTest {
 	BitArray key;
 	
 	public DESCipherTest() {
-		super(new DESCipher(), new SimpleAlphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*/=<>: .,;"));
+		super(new DESCipher(), new DESAlphabet());
 		key = new BitArray("0001001100110100010101110111100110011011101111001101111111110001");
 	}
 
