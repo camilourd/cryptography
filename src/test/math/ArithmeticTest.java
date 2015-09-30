@@ -1,10 +1,10 @@
-package test.tools;
+package test.math;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import tools.Arithmetic;
+import math.Arithmetic;
 
 public class ArithmeticTest {
 

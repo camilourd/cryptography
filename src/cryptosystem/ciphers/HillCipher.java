@@ -3,8 +3,8 @@ package cryptosystem.ciphers;
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 import flanagan.math.Matrix;
-import tools.Arithmetic;
-import tools.ModularArithmetic;
+import math.Arithmetic;
+import math.ModularArithmetic;
 
 public class HillCipher extends Cryptosystem<Matrix, String> {
 
@@ -55,6 +55,11 @@ public class HillCipher extends Cryptosystem<Matrix, String> {
 		modMatrix(key);
 		int det = (int) key.determinant();
 		return (det != 0) && Arithmetic.areCoprimes(det, alphabet.size());
+	}
+
+	@Override
+	public Matrix generateKey() {
+		return null;
 	}
 
 }

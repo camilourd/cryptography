@@ -30,4 +30,9 @@ public class CaesarCipher extends Cryptosystem<Integer, String> {
 		return true;
 	}
 
+	@Override
+	public Integer generateKey() {
+		return (int)(Math.random() * alphabet.size());
+	}
+
 }

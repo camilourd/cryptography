@@ -7,8 +7,8 @@ import org.junit.Test;
 import alphabet.alphabets.EnglishAlphabet;
 import cryptosystem.ciphers.AffineCipher;
 import cryptosystem.types.Pair;
+import math.Arithmetic;
 import test.cryptosystem.CryptosystemTest;
-import tools.Arithmetic;
 
 public class AffineCipherTest extends CryptosystemTest {
 

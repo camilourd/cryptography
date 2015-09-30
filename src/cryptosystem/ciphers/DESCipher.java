@@ -79,4 +79,13 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		return key.size() == keySize;
 	}
 
+	@Override
+	public BitArray generateKey() {
+		BitArray key = new BitArray(keySize, false);
+		for(int i = 0; i < key.size(); ++i)
+			if(Math.random() < 0.5)
+				key.set(i, true);
+		return key;
+	}
+
 }

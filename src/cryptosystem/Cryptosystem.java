@@ -10,10 +10,11 @@ public abstract class Cryptosystem<K, M> implements CipherFunction<K, M> {
 		this.alphabet = alphabet;
 	}
 	
-	public abstract boolean isValidKey(K key);
-
 	public Alphabet getAlphabet() {
 		return alphabet;
 	}
+	
+	public abstract boolean isValidKey(K key);
+	public abstract K generateKey();
 
 }

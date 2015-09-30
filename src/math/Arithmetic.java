@@ -1,4 +1,4 @@
-package tools;
+package math;
 
 public class Arithmetic {
 

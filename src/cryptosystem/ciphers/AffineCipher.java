@@ -1,10 +1,13 @@
 package cryptosystem.ciphers;
 
+import java.util.ArrayList;
+
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 import cryptosystem.types.Pair;
-import tools.Arithmetic;
-import tools.ModularArithmetic;
+import math.Arithmetic;
+import math.ModularArithmetic;
+import tools.MathTools;
 
 public class AffineCipher extends Cryptosystem<Pair<Integer, Integer>, String> {
 
@@ -34,6 +37,12 @@ public class AffineCipher extends Cryptosystem<Pair<Integer, Integer>, String> {
 	
 	public boolean isValidKey(Pair<Integer, Integer> key) {
 		return Arithmetic.areCoprimes(key.first, alphabet.size());
+	}
+
+	@Override
+	public Pair<Integer, Integer> generateKey() {
+		ArrayList<Integer> coprimes = MathTools.calculateCoprimes(alphabet.size());
+		return new Pair<Integer, Integer>(coprimes.get((int)(Math.random() * coprimes.size())), (int)(Math.random() * 100));
 	}
 
 }

@@ -120,5 +120,10 @@ public class RSA extends Cryptosystem<RSA.Key, String> {
 			this.e = e;
 		}
 	}
+
+	@Override
+	public Key generateKey() {
+		return null;
+	}
 }
  

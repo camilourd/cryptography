@@ -3,7 +3,7 @@ package alphabet.alphabets;
 import java.util.Arrays;
 
 import alphabet.Alphabet;
-import tools.ModularArithmetic;
+import math.ModularArithmetic;
 
 public class SimpleAlphabet implements Alphabet {
 	

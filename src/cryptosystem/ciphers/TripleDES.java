@@ -6,7 +6,7 @@ import unalcol.types.collection.bitarray.BitArray;
 
 public class TripleDES extends Cryptosystem<BitArray[], String> {
 
-	public DESCipher cipher;
+	protected DESCipher cipher;
 	
 	public TripleDES() {
 		super(new DESAlphabet());
@@ -30,6 +30,14 @@ public class TripleDES extends Cryptosystem<BitArray[], String> {
 	@Override
 	public boolean isValidKey(BitArray[] key) {
 		return key.length == 2 && cipher.isValidKey(key[0]) && cipher.isValidKey(key[1]);
+	}
+
+	@Override
+	public BitArray[] generateKey() {
+		BitArray[] key = new BitArray[2];
+		key[0] = cipher.generateKey();
+		key[1] = cipher.generateKey();
+		return key;
 	}
 
 }

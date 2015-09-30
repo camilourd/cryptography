@@ -30,4 +30,13 @@ public class VigenereCipher extends Cryptosystem<String, String> {
 		return key.length() > 0;
 	}
 
+	@Override
+	public String generateKey() {
+		int lenght = 20 + (int)(Math.random() * 100);
+		String key = "";
+		for(int i = 0; i < lenght; ++i)
+			key += alphabet.getCharacter((int)(Math.random() * alphabet.size()));
+		return key;
+	}
+
 }

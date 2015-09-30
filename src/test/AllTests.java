@@ -14,8 +14,8 @@ import test.cryptosystem.ciphers.TripleDESTest;
 import test.cryptosystem.ciphers.VigenereCipherTest;
 import test.cryptosystem.ciphers.des.DESGeneratorTest;
 import test.cryptosystem.ciphers.des.DESTest;
-import test.tools.ArithmeticTest;
-import test.tools.ModularArithmeticTest;
+import test.math.ArithmeticTest;
+import test.math.ModularArithmeticTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ AffineCipherTest.class, CaesarCipherTest.class, HillCipherTest.class, RSATest.class,
