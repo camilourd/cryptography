@@ -1,4 +1,4 @@
-package test.tools;
+package test.math;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,11 @@ public class XorArithmeticTest {
 	@Test
 	public void modTest() {
 		assertEquals(193, XorArithmetic.mod(11129, 283));
+	}
+	
+	@Test
+	public void xmultiplyByXTest() {
+		assertEquals(254, XorArithmetic.xmultiply(87, 19, 283));
 	}
 
 }

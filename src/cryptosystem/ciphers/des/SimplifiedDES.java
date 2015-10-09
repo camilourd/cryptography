@@ -4,6 +4,12 @@ import unalcol.types.collection.bitarray.BitArray;
 
 public class SimplifiedDES extends DES {
 	
+	public SimplifiedDES() {
+		super();
+		this.keySize = 9;
+		this.blockSize = 12;
+	}
+	
 	// Expansion permutation
 	public final static DESSubstitution EP = new DESSubstitution(new byte[] {
 			0, 1,  3,  2,  3,  2, 4, 5
@@ -21,7 +27,8 @@ public class SimplifiedDES extends DES {
 			}, 3)
 		};
 	
-	public static BitArray encrypt(BitArray key, BitArray message) {
+	@Override
+	public BitArray encode(BitArray key, BitArray message) {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = getEncryptKeys(key);
@@ -34,7 +41,7 @@ public class SimplifiedDES extends DES {
 		return output;
 	}
 
-	private static void calculateNextIteration(BitArray subkey, BitArray[] parts) {
+	private void calculateNextIteration(BitArray subkey, BitArray[] parts) {
 		BitArray result = expand(parts[1], EP);
 		result.xor(subkey);
 		BitArray[] inputs = DESGenerator.divide(S.length, result);
@@ -45,26 +52,23 @@ public class SimplifiedDES extends DES {
 		parts[1] = result;
 	}
 	
-	private static int getInt(BitArray bits) {
+	private int getInt(BitArray bits) {
 		int val = 0;
 		for(int i = 0; i < bits.size(); ++i)
 			val = (val<<1) + (bits.get(i)? 1:0);
 		return val;
 	}
 
-	private static BitArray[] getEncryptKeys(BitArray key) {
+	private BitArray[] getEncryptKeys(BitArray key) {
 		BitArray[] subkeys = new BitArray[2];
 		subkeys[0] = key.subBitArray(0, 8);
 		subkeys[1] = (BitArray) subkeys[0].clone();
 		DESGenerator.leftRotated(subkeys[1]);
 		return subkeys;
 	}
-
-	public static boolean isFeasible(BitArray key, BitArray message) {
-		return key.size() == 9 && message.size() == 12;
-	}
 	
-	public static BitArray decrypt(BitArray key, BitArray message) {
+	@Override
+	public BitArray decode(BitArray key, BitArray message) {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = getEncryptKeys(key);

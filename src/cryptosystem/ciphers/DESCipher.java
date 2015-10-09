@@ -10,17 +10,17 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	public final static int ENCRYPT = 1;
 	public final static int DECRYPT = 2;
 	
-	protected int keySize = 64;
-	protected int blockSize = 64;
+	protected DES des;
 	
 	public DESCipher() {
 		super(new DESAlphabet());
+		des = new DES();
 	}
 
 	@Override
 	public String encode(BitArray key, String message) {
 		if(isValidKey(key)) {
-			while((message.length() * 6) % blockSize > 0)
+			while((message.length() * 6) % des.getBlockSize() > 0)
 				message += alphabet.getCharacter((int)(Math.random() * alphabet.size()));
 			return runDES(ENCRYPT, key, message);
 		}
@@ -32,14 +32,14 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		BitArray code = new BitArray(0, false), save = new BitArray(0, false);
 		for(int i = 0, j = 0; i < result.length; ++i) {
 			code.add(ParseBitArray(result[i]));
-			if(code.size() >= blockSize) {
-				save.add(runMethod(method, key, code.subBitArray(0, blockSize)));
+			if(code.size() >= des.getBlockSize()) {
+				save.add(runMethod(method, key, code.subBitArray(0, des.getBlockSize())));
 				
 				int n = save.size() / 6;
 				for(int k = 0; k < n; ++k)
 					result[j++] = ParseCharacter(save, k * 6);
 				
-				code = code.subBitArray(blockSize);
+				code = code.subBitArray(des.getBlockSize());
 				save = save.subBitArray(n * 6);
 			}
 		}
@@ -48,8 +48,8 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 
 	protected BitArray runMethod(int method, BitArray key, BitArray code) {
 		if(method == ENCRYPT)
-			return DES.encrypt(key, code);
-		return DES.decrypt(key, code);
+			return des.encode(key, code);
+		return des.decode(key, code);
 	}
 
 	public BitArray ParseBitArray(char c) {
@@ -76,16 +76,12 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 
 	@Override
 	public boolean isValidKey(BitArray key) {
-		return key.size() == keySize;
+		return des.isValidKey(key);
 	}
 
 	@Override
 	public BitArray generateKey() {
-		BitArray key = new BitArray(keySize, false);
-		for(int i = 0; i < key.size(); ++i)
-			if(Math.random() < 0.5)
-				key.set(i, true);
-		return key;
+		return des.generateKey();
 	}
 
 }

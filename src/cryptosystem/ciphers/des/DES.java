@@ -1,9 +1,20 @@
 package cryptosystem.ciphers.des;
 
+import alphabet.alphabets.SimpleAlphabet;
+import cryptosystem.Cryptosystem;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class DES {
+public class DES extends Cryptosystem<BitArray, BitArray> {
 	
+	protected int keySize;
+	protected int blockSize;
+	
+	public DES() {
+		super(new SimpleAlphabet("01"));
+		this.keySize = 64;
+		this.blockSize = 64;
+	}
+
 	// Initial Permutation
 	public final static DESSubstitution IP = new DESSubstitution(new byte[] {
 			57, 49, 41, 33, 25, 17, 9, 1,
@@ -103,7 +114,8 @@ public class DES {
 	        21, 10, 3,  24
 		});
 	
-	public static BitArray encrypt(BitArray key, BitArray message) {
+	@Override
+	public BitArray encode(BitArray key, BitArray message) {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
@@ -117,31 +129,31 @@ public class DES {
 		return output;
 	}
 	
-	public static boolean isFeasible(BitArray key, BitArray message) {
+	public boolean isFeasible(BitArray key, BitArray message) {
 		return key.size() == 64 && message.size() == 64;
 	}
 
-	private static void calculateNewParts(BitArray[] subkeys, BitArray[] parts, int i) {
+	private void calculateNewParts(BitArray[] subkeys, BitArray[] parts, int i) {
 		BitArray previous_left = parts[0];
 		parts[0] = parts[1];
 		parts[1] = feistel(parts[1], subkeys[i]);
 		parts[1].xor(previous_left);
 	}
 	
-	public static BitArray feistel(BitArray right, BitArray subkey) {
+	public BitArray feistel(BitArray right, BitArray subkey) {
 		BitArray result = expand((BitArray) right.clone(), EP);
 		result.xor(subkey);
 		return P.substitute(substitute(result));
 	}
 	
-	public static BitArray expand(BitArray right, DESSubstitution ep) {
+	public BitArray expand(BitArray right, DESSubstitution ep) {
 		BitArray result = (BitArray) right.clone();
 		if(result.size() < ep.size())
 			result.add(new BitArray(ep.size() - result.size(), false));
 		return ep.substitute(result);
 	}
 	
-	private static BitArray substitute(BitArray right) {
+	private BitArray substitute(BitArray right) {
 		BitArray[] divs = DESGenerator.divide(S.length, right);
 		BitArray result = new BitArray(0, false);
 		for(int i = 0; i < divs.length; ++i) {
@@ -154,19 +166,20 @@ public class DES {
 		return result;
 	}
 	
-	protected static void swap(BitArray[] parts) {
+	protected void swap(BitArray[] parts) {
 		BitArray aux = parts[0];
 		parts[0] = parts[1];
 		parts[1] = aux;
 	}
 	
-	protected static BitArray join(BitArray left, BitArray right) {
+	protected BitArray join(BitArray left, BitArray right) {
 		BitArray result = (BitArray) left.clone();
 		result.add(right);
 		return result;
 	}
 	
-	public static BitArray decrypt(BitArray key, BitArray message) {
+	@Override
+	public BitArray decode(BitArray key, BitArray message) {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
@@ -178,6 +191,24 @@ public class DES {
 			output = IP.restore(join(parts[0], parts[1]));
 		}
 		return output;
+	}
+
+	@Override
+	public boolean isValidKey(BitArray key) {
+		return key.size() == keySize;
+	}
+
+	@Override
+	public BitArray generateKey() {
+		BitArray key = new BitArray(keySize, false);
+		for(int i = 0; i < key.size(); ++i)
+			if(Math.random() < 0.5)
+				key.set(i, true);
+		return key;
+	}
+
+	public int getBlockSize() {
+		return blockSize;
 	}
 	
 }

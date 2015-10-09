@@ -16,12 +16,13 @@ import test.cryptosystem.ciphers.des.DESGeneratorTest;
 import test.cryptosystem.ciphers.des.DESTest;
 import test.math.ArithmeticTest;
 import test.math.ModularArithmeticTest;
+import test.math.XorArithmeticTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ AffineCipherTest.class, CaesarCipherTest.class, HillCipherTest.class, RSATest.class,
 		SimpleSubstitutionCipherTest.class, VigenereCipherTest.class, SimpleAlphabetTest.class,
 		ArithmeticTest.class, ModularArithmeticTest.class, DESGeneratorTest.class, DESTest.class,
-		TripleDESTest.class})
+		TripleDESTest.class, XorArithmeticTest.class})
 public class AllTests {
 
 }

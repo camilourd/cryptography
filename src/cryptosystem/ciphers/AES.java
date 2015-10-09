@@ -2,15 +2,15 @@ package cryptosystem.ciphers;
 
 import alphabet.alphabets.SimpleAlphabet;
 import cryptosystem.Cryptosystem;
-import math.XorArithmetic;
 
 public class AES extends Cryptosystem<int[], String> {
 	
 	protected int keylenght = 32;
-	protected int m = 283;
+	protected int polynomial;
 	
-	public AES() {
+	public AES(int polynomial) {
 		super(new SimpleAlphabet(" !¡\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¿áéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙäëïöü"));
+		this.polynomial = polynomial;
 	}
 	
 	@Override
@@ -47,10 +47,6 @@ public class AES extends Cryptosystem<int[], String> {
 		for(int i = 0; i < key.length; ++i)
 			key[i] = (int)(Math.random() * 256);
 		return key;
-	}
-	
-	public int xtimes(int a, int x) {
-		return XorArithmetic.mod(XorArithmetic.multiply(a, x), m);
 	}
 
 }

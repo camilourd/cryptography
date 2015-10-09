@@ -23,5 +23,15 @@ public class XorArithmetic {
 		}
 		return a;
 	}
+	
+	public static int xmultiply(int b, int x, int m) {
+		int res = 0;
+		for(; x > 0; x >>= 1) {
+			if((x & 1) > 0)
+				res ^= b;
+			b = XorArithmetic.mod(b << 1, m);
+		}
+		return res;
+	}
 
 }

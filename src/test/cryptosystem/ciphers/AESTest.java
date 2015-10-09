@@ -12,7 +12,7 @@ import test.cryptosystem.CryptosystemTest;
 public class AESTest extends CryptosystemTest {
 
 	public AESTest() {
-		super(new AES(), new SimpleAlphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ."));
+		super(new AES(12), new SimpleAlphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ."));
 	}
 	
 	@Override
