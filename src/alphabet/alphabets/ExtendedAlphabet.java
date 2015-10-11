@@ -1,8 +1,8 @@
 package alphabet.alphabets;
 
-public class AESAlphabet extends SimpleAlphabet {
+public class ExtendedAlphabet extends SimpleAlphabet {
 
-	public AESAlphabet() {
+	public ExtendedAlphabet() {
 		super("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .");
 	}
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import alphabet.alphabets.AESAlphabet;
+import alphabet.alphabets.ExtendedAlphabet;
 import cryptosystem.ciphers.aes.AES;
 import cryptosystem.ciphers.aes.KeyGenerator;
 import cryptosystem.ciphers.aes.StateArray;
@@ -17,7 +17,7 @@ import unalcol.types.collection.bitarray.BitArray;
 public class AESTest extends CryptosystemTest {
 
 	public AESTest() {
-		super(new AES(128, 283), new AESAlphabet());
+		super(new AES(128, 283), new ExtendedAlphabet());
 	}
 	
 	@Override
@@ -32,9 +32,10 @@ public class AESTest extends CryptosystemTest {
 		BitArray[] words = KeyGenerator.generate(key, subs);
 		StateArray result = ((AES)cryptosystem).encode(words, state);
 		System.out.println("encoding: " + BitArrayTools.toHexString(result.getOutput()));
+		assertNotEquals(result.getOutput(), input);
 		result = ((AES)cryptosystem).decode(words, state);
 		System.out.println("decoding: " + BitArrayTools.toHexString(result.getOutput()) + "\n");
-		
+		assertEquals(result.getOutput(), input);
 		
 		input = new BitArray("00000000000100010010001000110011010001000101010101100110011101111000100010011001101010101011101111001100110111011110111011111111");
 		System.out.println("input:    " + BitArrayTools.toHexString(input));
@@ -45,8 +46,10 @@ public class AESTest extends CryptosystemTest {
 		words = KeyGenerator.generate(key, subs);
 		result = ((AES)cryptosystem).encode(words, state);
 		System.out.println("encoding: " + BitArrayTools.toHexString(result.getOutput()));
+		assertNotEquals(result.getOutput(), input);
 		result = ((AES)cryptosystem).decode(words, state);
-		System.out.println("decoding: " + BitArrayTools.toHexString(result.getOutput()));
+		System.out.println("decoding: " + BitArrayTools.toHexString(result.getOutput()) + "\n");
+		assertEquals(result.getOutput(), input);
 	}
 	
 

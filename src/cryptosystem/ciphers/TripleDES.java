@@ -1,6 +1,6 @@
 package cryptosystem.ciphers;
 
-import alphabet.alphabets.DESAlphabet;
+import alphabet.alphabets.ExtendedAlphabet;
 import cryptosystem.Cryptosystem;
 import unalcol.types.collection.bitarray.BitArray;
 
@@ -9,7 +9,7 @@ public class TripleDES extends Cryptosystem<BitArray[], String> {
 	protected DESCipher cipher;
 	
 	public TripleDES() {
-		super(new DESAlphabet());
+		super(new ExtendedAlphabet());
 		cipher = new DESCipher();
 	}
 

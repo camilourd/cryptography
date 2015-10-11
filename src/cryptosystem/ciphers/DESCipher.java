@@ -1,9 +1,10 @@
 package cryptosystem.ciphers;
 
-import alphabet.alphabets.DESAlphabet;
+import alphabet.alphabets.ExtendedAlphabet;
 import cryptosystem.Cryptosystem;
 import unalcol.types.collection.bitarray.BitArray;
 import cryptosystem.ciphers.des.DES;
+import tools.BitArrayTools;
 
 public class DESCipher extends Cryptosystem<BitArray, String> {
 
@@ -13,7 +14,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	protected DES des;
 	
 	public DESCipher() {
-		super(new DESAlphabet());
+		super(new ExtendedAlphabet());
 		des = new DES();
 	}
 
@@ -31,14 +32,12 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		char[] result = message.toCharArray();
 		BitArray code = new BitArray(0, false), save = new BitArray(0, false);
 		for(int i = 0, j = 0; i < result.length; ++i) {
-			code.add(ParseBitArray(result[i]));
+			code.add(BitArrayTools.parseBitArray(alphabet.getIndex(result[i]), 6));
 			if(code.size() >= des.getBlockSize()) {
 				save.add(runMethod(method, key, code.subBitArray(0, des.getBlockSize())));
-				
 				int n = save.size() / 6;
 				for(int k = 0; k < n; ++k)
-					result[j++] = ParseCharacter(save, k * 6);
-				
+					result[j++] = alphabet.getCharacter(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
 				code = code.subBitArray(des.getBlockSize());
 				save = save.subBitArray(n * 6);
 			}
@@ -50,21 +49,6 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		if(method == ENCODE)
 			return des.encode(key, code);
 		return des.decode(key, code);
-	}
-
-	public BitArray ParseBitArray(char c) {
-		int val = alphabet.getIndex(c);
-		BitArray result = new BitArray(6, false);
-		for(int i = 0; i < 6; ++i)
-			result.set(5 - i, (val & (1<<i)) > 0);
-		return result;
-	}
-	
-	private char ParseCharacter(BitArray save, int idx) {
-		int val = 0;
-		for(int i = 0; i < 6; ++i)
-			val = (val<<1) + ((save.get(idx + i))? 1:0);
-		return alphabet.getCharacter(val);
 	}
 
 	@Override

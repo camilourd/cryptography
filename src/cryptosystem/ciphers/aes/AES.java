@@ -1,6 +1,6 @@
 package cryptosystem.ciphers.aes;
 
-import alphabet.alphabets.AESAlphabet;
+import alphabet.alphabets.ExtendedAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;;
@@ -28,7 +28,7 @@ public class AES extends Cryptosystem<BitArray[], StateArray> {
 	public static int DECODE = 1;
 
 	public AES(int keyLenght, int polynomial) {
-		super(new AESAlphabet());
+		super(new ExtendedAlphabet());
 		this.blockSize = keyLenght;
 		this.nk = keyLenght / 32;
 		this.nr = this.nk + 6;
