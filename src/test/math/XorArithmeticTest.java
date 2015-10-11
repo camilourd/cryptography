@@ -20,6 +20,11 @@ public class XorArithmeticTest {
 	}
 	
 	@Test
+	public void divideTest() {
+		assertEquals(40, XorArithmetic.divide(11129, 283));
+	}
+	
+	@Test
 	public void xmultiplyByXTest() {
 		assertEquals(254, XorArithmetic.xmultiply(87, 19, 283));
 	}

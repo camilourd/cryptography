@@ -2,6 +2,7 @@ package cryptosystem.ciphers.des;
 
 import alphabet.alphabets.SimpleAlphabet;
 import cryptosystem.Cryptosystem;
+import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class DES extends Cryptosystem<BitArray, BitArray> {
@@ -120,7 +121,7 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
 			output = IP.substitute(output);
-			BitArray[] parts = DESGenerator.divide(2, output);
+			BitArray[] parts = BitArrayTools.divide(2, output);
 			for(int i = 0; i < subkeys.length; ++i)
 				calculateNewParts(subkeys, parts, i);
 			swap(parts);
@@ -154,7 +155,7 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 	}
 	
 	private BitArray substitute(BitArray right) {
-		BitArray[] divs = DESGenerator.divide(S.length, right);
+		BitArray[] divs = BitArrayTools.divide(S.length, right);
 		BitArray result = new BitArray(0, false);
 		for(int i = 0; i < divs.length; ++i) {
 			int f = ((divs[i].get(0))? 2:0) + ((divs[i].get(5))? 1:0);
@@ -184,7 +185,7 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
 			output = FP.restore(output);
-			BitArray[] parts = DESGenerator.divide(2, output);
+			BitArray[] parts = BitArrayTools.divide(2, output);
 			for(int i = subkeys.length - 1; i >= 0 ; --i)
 				calculateNewParts(subkeys, parts, i);
 			swap(parts);
@@ -200,11 +201,7 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 
 	@Override
 	public BitArray generateKey() {
-		BitArray key = new BitArray(keySize, false);
-		for(int i = 0; i < key.size(); ++i)
-			if(Math.random() < 0.5)
-				key.set(i, true);
-		return key;
+		return BitArrayTools.generate(keySize);
 	}
 
 	public int getBlockSize() {

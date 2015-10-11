@@ -1,5 +1,6 @@
 package cryptosystem.ciphers.des;
 
+import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class SimplifiedDES extends DES {
@@ -32,7 +33,7 @@ public class SimplifiedDES extends DES {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = getEncryptKeys(key);
-			BitArray[] parts = DESGenerator.divide(2, output);
+			BitArray[] parts = BitArrayTools.divide(2, output);
 			for(int i = 0; i < subkeys.length; ++i)
 				calculateNextIteration(subkeys[i], parts);
 			swap(parts);
@@ -44,7 +45,7 @@ public class SimplifiedDES extends DES {
 	private void calculateNextIteration(BitArray subkey, BitArray[] parts) {
 		BitArray result = expand(parts[1], EP);
 		result.xor(subkey);
-		BitArray[] inputs = DESGenerator.divide(S.length, result);
+		BitArray[] inputs = BitArrayTools.divide(S.length, result);
 		result = S[0].getEcoding((inputs[0].get(0))? 1:0, getInt(inputs[0].subBitArray(1)));
 		result.add(S[1].getEcoding((inputs[1].get(0))? 1:0, getInt(inputs[1].subBitArray(1))));
 		result.xor(parts[0]);
@@ -72,7 +73,7 @@ public class SimplifiedDES extends DES {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = getEncryptKeys(key);
-			BitArray[] parts = DESGenerator.divide(2, output);
+			BitArray[] parts = BitArrayTools.divide(2, output);
 			for(int i = subkeys.length - 1; i >= 0 ; --i)
 				calculateNextIteration(subkeys[i], parts);
 			swap(parts);

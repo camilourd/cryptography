@@ -7,8 +7,8 @@ import cryptosystem.ciphers.des.DES;
 
 public class DESCipher extends Cryptosystem<BitArray, String> {
 
-	public final static int ENCRYPT = 1;
-	public final static int DECRYPT = 2;
+	public final static int ENCODE = 1;
+	public final static int DECODE = 2;
 	
 	protected DES des;
 	
@@ -22,7 +22,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 		if(isValidKey(key)) {
 			while((message.length() * 6) % des.getBlockSize() > 0)
 				message += alphabet.getCharacter((int)(Math.random() * alphabet.size()));
-			return runDES(ENCRYPT, key, message);
+			return runDES(ENCODE, key, message);
 		}
 		return message;
 	}
@@ -47,7 +47,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	}
 
 	protected BitArray runMethod(int method, BitArray key, BitArray code) {
-		if(method == ENCRYPT)
+		if(method == ENCODE)
 			return des.encode(key, code);
 		return des.decode(key, code);
 	}
@@ -70,7 +70,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	@Override
 	public String decode(BitArray key, String message) {
 		if(isValidKey(key))
-			return runDES(DECRYPT ,key, message);
+			return runDES(DECODE ,key, message);
 		return message;
 	}
 

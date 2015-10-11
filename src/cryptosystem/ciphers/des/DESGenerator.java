@@ -1,5 +1,6 @@
 package cryptosystem.ciphers.des;
 
+import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class DESGenerator {
@@ -32,19 +33,11 @@ public class DESGenerator {
 	
 	
 	public static BitArray[] generateKeys(BitArray key) {
-		BitArray[] parts = DESGenerator.divide(2, (PC1.substitute(key)).subBitArray(0, 56));
+		BitArray[] parts = BitArrayTools.divide(2, (PC1.substitute(key)).subBitArray(0, 56));
 		BitArray[] keys = new BitArray[rotations.length];
 		for(int i = 0; i < rotations.length; ++i)
 			keys[i] = nextKey(i, parts[0], parts[1]);
 		return keys;
-	}
-
-	public static BitArray[] divide(int n, BitArray values) {
-		BitArray[] parts = new BitArray[n];
-		int size = values.size() / n;
-		for(int i = 0; i < n; ++i)
-			parts[i] = values.subBitArray(i * size, (i + 1) * size);
-		return parts;
 	}
 	
 	public static void leftRotated(BitArray values) {
