@@ -8,8 +8,8 @@ public class RSAKey {
 	public PrivateKey privateKey;
 	
 	public RSAKey(BigInteger p, BigInteger q, BigInteger e) {
-		this.publicKey = new PublicKey(p, q, e);
 		this.privateKey = new PrivateKey(p, q, e);
+		this.publicKey = new PublicKey(p, q, e);
 	}
 
 	public RSAKey(PublicKey publicKey, PrivateKey privateKey) {

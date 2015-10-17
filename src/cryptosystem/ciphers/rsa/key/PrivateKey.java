@@ -6,15 +6,16 @@ public class PrivateKey {
 	
 	public BigInteger e;
 	public BigInteger n;
+	public BigInteger phi;
 	
 	public PrivateKey(BigInteger p, BigInteger q, BigInteger e) {
 		this.e = e;
 		this.n = p.multiply(q);
+		this.phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
 	}
-
-	public PrivateKey(BigInteger e, BigInteger n) {
-		this.e = e;
-		this.n = n;
+	
+	public boolean isValid() {
+		return e.gcd(phi).equals(BigInteger.ONE);
 	}
 
 }

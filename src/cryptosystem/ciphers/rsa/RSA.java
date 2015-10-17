@@ -24,9 +24,7 @@ public class RSA extends Cryptosystem<RSAKey, BigInteger> {
 
 	@Override
 	public boolean isValidKey(RSAKey key) {
-		return (key.publicKey.d.modInverse(key.publicKey.n)).equals(key.privateKey.e)
-				&& key.publicKey.n.equals(key.privateKey.n)
-				&& key.publicKey.n.toString().length() > 5;
+		return key.privateKey.isValid();
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public class PublicKey {
 	
 	public PublicKey(BigInteger p, BigInteger q, BigInteger e) {
 		this.n = p.multiply(q);
-		this.d = e.modInverse(n);
+		this.d = e.modInverse((p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE)));
 	}
 
 	public PublicKey(BigInteger d, BigInteger n) {

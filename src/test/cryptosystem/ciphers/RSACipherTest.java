@@ -20,7 +20,7 @@ public class RSACipherTest extends BlockCryptosystemTest<RSAKey, String, BigInte
 		RSAKey key = new RSAKey(
 					new BigInteger("961748941"),
 					new BigInteger("982451653"),
-					new BigInteger("4326098")
+					new BigInteger("3260981")
 				);
 		String message = "this is a sample test for RSA Cipher";
 		System.out.println("input:    " + message);
