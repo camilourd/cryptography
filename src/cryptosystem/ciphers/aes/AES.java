@@ -1,11 +1,11 @@
 package cryptosystem.ciphers.aes;
 
-import alphabet.alphabets.ExtendedAlphabet;
+import alphabet.alphabets.BinaryAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;;
 
-public class AES extends Cryptosystem<BitArray[], StateArray> {
+public class AES extends Cryptosystem<BitArray[], StateArray, Boolean> {
 	
 	protected int blockSize;
 	protected int nk, nr, nb = 4;
@@ -23,12 +23,9 @@ public class AES extends Cryptosystem<BitArray[], StateArray> {
 		{13, 9, 14, 11},
 		{11, 13, 9, 14}
 	};
-	
-	public static int ENCODE = 0;
-	public static int DECODE = 1;
 
 	public AES(int keyLenght, int polynomial) {
-		super(new ExtendedAlphabet());
+		super(new BinaryAlphabet());
 		this.blockSize = keyLenght;
 		this.nk = keyLenght / 32;
 		this.nr = this.nk + 6;
@@ -44,11 +41,13 @@ public class AES extends Cryptosystem<BitArray[], StateArray> {
 	public StateArray encode(BitArray key[], StateArray state) {
 		addRoundKey(state, key, 0);
 		for(int round = 1; round < nr; ++round) {
-			substitute(state, ENCODE);
-			mixColumns(state, ENCODE);
+			subBytes(state, StateSubstitution.SUBSTITUTE);
+			shiftRows(state, StateArray.LEFT_SHIFT);
+			state.multiplyColumns(matrixMultiplication, polynomial);
 			addRoundKey(state, key, round * nb);
 		}
-		substitute(state, ENCODE);
+		subBytes(state, StateSubstitution.SUBSTITUTE);
+		shiftRows(state, StateArray.LEFT_SHIFT);
 		addRoundKey(state, key, nr * nb);
 		return state;
 	}
@@ -56,23 +55,6 @@ public class AES extends Cryptosystem<BitArray[], StateArray> {
 	public void addRoundKey(StateArray state, BitArray[] key, int i) {
 		for(int col = 0; col < nb; ++col)
 			state.multiplyColumn(key[i + col], col);
-	}
-	
-	public void substitute(StateArray state, int op) {
-		if(op == ENCODE) {
-			subBytes(state, StateSubstitution.SUBSTITUTE);
-			shiftRows(state, StateArray.LEFT_SHIFT);
-		} else {
-			shiftRows(state, StateArray.RIGHT_SHIFT);
-			subBytes(state, StateSubstitution.RESTORE);
-		}
-	}
-
-	private void mixColumns(StateArray state, int op) {
-		if(op == ENCODE)
-			state.multiplyColumns(matrixMultiplication, polynomial);
-		else
-			state.multiplyColumns(invMatrixMultiplication, polynomial);
 	}
 
 	public void subBytes(StateArray state, int dir) {
@@ -94,11 +76,13 @@ public class AES extends Cryptosystem<BitArray[], StateArray> {
 	public StateArray decode(BitArray key[], StateArray state) {
 		addRoundKey(state, key, nr * nb);
 		for(int round = nr - 1; round > 0; --round) {
-			substitute(state, DECODE);
+			shiftRows(state, StateArray.RIGHT_SHIFT);
+			subBytes(state, StateSubstitution.RESTORE);
 			addRoundKey(state, key, round * nb);
-			mixColumns(state, DECODE);
+			state.multiplyColumns(invMatrixMultiplication, polynomial);
 		}
-		substitute(state, DECODE);
+		shiftRows(state, StateArray.RIGHT_SHIFT);
+		subBytes(state, StateSubstitution.RESTORE);
 		addRoundKey(state, key, 0);
 		return state;
 	}

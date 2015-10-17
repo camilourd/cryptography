@@ -3,17 +3,15 @@ package test.alphabet;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import alphabet.Alphabet;
-import alphabet.alphabets.EnglishAlphabet;
+import alphabet.alphabets.CharacterAlphabet;
 
 public class SimpleAlphabetTest {
 
-	Alphabet alphabet;
+	CharacterAlphabet alphabet;
 	char[] cars;
 	
 	public SimpleAlphabetTest() {
-		alphabet = new EnglishAlphabet();
+		alphabet = new CharacterAlphabet("aby574ok-,;");
 		cars = alphabet.getCharacters();
 	}
 	
@@ -27,9 +25,9 @@ public class SimpleAlphabetTest {
 	@Test
 	public void getCharacterTest() {
 		for(int i = 0; i < cars.length; ++i) {
-			assertEquals(alphabet.getCharacter(i), cars[i]);
-			assertEquals(alphabet.getCharacter(i + 10), cars[(i + 10) % cars.length]);
-			assertEquals(alphabet.getCharacter(-(i + 1)), cars[cars.length - 1 - (i % cars.length)]);
+			assertEquals((char)alphabet.getElement(i), cars[i]);
+			assertEquals((char)alphabet.getElement(i + 10), cars[(i + 10) % cars.length]);
+			assertEquals((char)alphabet.getElement(-(i + 1)), cars[cars.length - 1 - (i % cars.length)]);
 		}
 	}
 

@@ -5,17 +5,17 @@ import java.util.Arrays;
 import alphabet.Alphabet;
 import math.ModularArithmetic;
 
-public class SimpleAlphabet implements Alphabet {
+public class CharacterAlphabet implements Alphabet<Character> {
 	
 	protected char[] cars;
 
-	public SimpleAlphabet(String cars) {
+	public CharacterAlphabet(String cars) {
 		this.cars = cars.toCharArray();
 		Arrays.sort(this.cars);
 	}
 
 	@Override
-	public int getIndex(char car) {
+	public int getIndex(Character car) {
 		int low = 0, high = cars.length, mid;
 		while(low < high) {
 			mid = (low + high) >> 1;
@@ -28,11 +28,10 @@ public class SimpleAlphabet implements Alphabet {
 	}
 
 	@Override
-	public char getCharacter(int index) {
+	public Character getElement(int index) {
 		return cars[ModularArithmetic.modulo(index, cars.length)];
 	}
 	
-	@Override
 	public char[] getCharacters() {
 		return this.cars;
 	}

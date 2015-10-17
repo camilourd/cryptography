@@ -1,4 +1,4 @@
-package cryptosystem.types;
+package types;
 
 public class Pair<X, Y> {
 	

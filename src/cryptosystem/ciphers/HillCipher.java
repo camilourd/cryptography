@@ -6,9 +6,9 @@ import flanagan.math.Matrix;
 import math.Arithmetic;
 import math.ModularArithmetic;
 
-public class HillCipher extends Cryptosystem<Matrix, String> {
+public class HillCipher extends Cryptosystem<Matrix, String, Character> {
 
-	public HillCipher(Alphabet alphabet) {
+	public HillCipher(Alphabet<Character> alphabet) {
 		super(alphabet);
 	}
 
@@ -40,7 +40,7 @@ public class HillCipher extends Cryptosystem<Matrix, String> {
 				input[0][j] = alphabet.getIndex(result[i + j]);
 			Matrix aux = (new Matrix(input)).times(key);
 			for(int j = 0; j < size; ++j)
-				result[i + j] = alphabet.getCharacter((int)aux.getElement(0, j));
+				result[i + j] = alphabet.getElement((int)aux.getElement(0, j));
 		}
 	}
 

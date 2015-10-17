@@ -8,7 +8,7 @@ import cryptosystem.ciphers.aes.StateArray;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class AESCipher extends Cryptosystem<BitArray, String> {
+public class AESCipher extends Cryptosystem<BitArray, String, Character> {
 
 	protected int keyLenght;
 	protected int polynomial;
@@ -28,7 +28,7 @@ public class AESCipher extends Cryptosystem<BitArray, String> {
 	public String encode(BitArray key, String message) {
 		if(isValidKey(key)) {
 			while((message.length() * 6) % 128 > 0)
-				message += alphabet.getCharacter((int)(Math.random() * alphabet.size()));
+				message += alphabet.getElement((int)(Math.random() * alphabet.size()));
 			BitArray[] keys = KeyGenerator.generate(key, aes.getSubstitution());
 			return runAES(ENCODE, keys, message);
 		}
@@ -44,7 +44,7 @@ public class AESCipher extends Cryptosystem<BitArray, String> {
 				save.add(runMethod(method, key, code.subBitArray(0, 128)));
 				int n = save.size() / 6;
 				for(int k = 0; k < n; ++k)
-					result[j++] = alphabet.getCharacter(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
+					result[j++] = alphabet.getElement(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
 				code = code.subBitArray(128);
 				save = save.subBitArray(n * 6);
 			}

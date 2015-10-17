@@ -2,15 +2,15 @@ package cryptosystem;
 
 import alphabet.Alphabet;
 
-public abstract class Cryptosystem<K, M> implements CipherFunction<K, M> {
+public abstract class Cryptosystem<K, M, C> implements CipherFunction<K, M> {
 	
-	protected Alphabet alphabet;
+	protected Alphabet<C> alphabet;
 	
-	public Cryptosystem(Alphabet alphabet) {
+	public Cryptosystem(Alphabet<C> alphabet) {
 		this.alphabet = alphabet;
 	}
 	
-	public Alphabet getAlphabet() {
+	public Alphabet<C> getAlphabet() {
 		return alphabet;
 	}
 	

@@ -2,31 +2,27 @@ package test.cryptosystem.ciphers.des;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
+import cryptosystem.Cryptosystem;
 import cryptosystem.ciphers.des.DES;
+import test.cryptosystem.CryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class DESTest {
+public class DESTest extends CryptosystemTest<BitArray, BitArray, Boolean> {
 	
 	public BitArray key, input, output;
-	public DES des;
 	
-
-	@Before
-	public void setUp() throws Exception {
-		des = new DES();
-		key = des.generateKey();
+	public DESTest(Cryptosystem<BitArray, BitArray, Boolean> cryptosystem) {
+		super(new DES());
+		key = cryptosystem.generateKey();
 		input = new BitArray("0000000100100011010001010110011110001001101010111100110111101111");
 	}
 
-	@Test
-	public void test() {
-		BitArray result = des.encode(key, input);
+	@Override
+	public void encodeDecodeTest() {
+		BitArray result = cryptosystem.encode(key, input);
 		System.out.println(key);
 		assertNotEquals(input.toString(), result.toString());
-		result = des.decode(key, result);
+		result = cryptosystem.decode(key, result);
 		assertEquals(input.toString(), result.toString());
 	}
 

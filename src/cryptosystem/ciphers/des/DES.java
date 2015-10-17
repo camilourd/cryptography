@@ -1,17 +1,17 @@
 package cryptosystem.ciphers.des;
 
-import alphabet.alphabets.SimpleAlphabet;
+import alphabet.alphabets.BinaryAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class DES extends Cryptosystem<BitArray, BitArray> {
+public class DES extends Cryptosystem<BitArray, BitArray, Boolean> {
 	
 	protected int keySize;
 	protected int blockSize;
 	
 	public DES() {
-		super(new SimpleAlphabet("01"));
+		super(new BinaryAlphabet());
 		this.keySize = 64;
 		this.blockSize = 64;
 	}
@@ -131,7 +131,7 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 	}
 	
 	public boolean isFeasible(BitArray key, BitArray message) {
-		return key.size() == 64 && message.size() == 64;
+		return key.size() == keySize && message.size() == blockSize;
 	}
 
 	private void calculateNewParts(BitArray[] subkeys, BitArray[] parts, int i) {

@@ -7,9 +7,9 @@ import java.util.StringTokenizer;
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 
-public class RSA extends Cryptosystem<RSA.Key, String> {
+public class RSA extends Cryptosystem<RSA.Key, String, Character> {
 
-	public RSA(Alphabet alphabet) {
+	public RSA(Alphabet<Character> alphabet) {
 		super(alphabet);
 	}
 
@@ -31,7 +31,7 @@ public class RSA extends Cryptosystem<RSA.Key, String> {
 		
 		char[] input = Arrays.copyOf(message.toCharArray(), msgLength+dummy);
 		for (int i = input.length-1; dummy > 0; i--, dummy--) {
-			input[i] = alphabet.getCharacter(0);
+			input[i] = alphabet.getElement(0);
 		}
 		String output = "";
 		
@@ -71,7 +71,7 @@ public class RSA extends Cryptosystem<RSA.Key, String> {
 					idx *= 10;
 					idx += block.charAt(i+k)-'0';
 				}
-				output += alphabet.getCharacter(idx);
+				output += alphabet.getElement(idx);
 			}
 		}
 		return output;

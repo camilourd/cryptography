@@ -6,10 +6,10 @@ import alphabet.alphabets.EnglishAlphabet;
 import cryptosystem.ciphers.RSA;
 import test.cryptosystem.CryptosystemTest;
 
-public class RSATest  extends CryptosystemTest {
+public class RSATest  extends CryptosystemTest<RSA.Key, String, Character> {
 
 	public RSATest() {
-		super(new RSA(new EnglishAlphabet()), new EnglishAlphabet());
+		super(new RSA(new EnglishAlphabet()));
 	}
 
 	@Override

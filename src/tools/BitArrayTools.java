@@ -1,8 +1,11 @@
 package tools;
 
+import alphabet.alphabets.HexadecimalAlphabet;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class BitArrayTools {
+	
+	public static final HexadecimalAlphabet hexAlphabet = new HexadecimalAlphabet();
 	
 	public static int parseInt(BitArray bits) {
 		int num = 0;
@@ -30,18 +33,19 @@ public class BitArrayTools {
 		String result = "";
 		int start = num.size() % 4;
 		if(start > 0)
-			result += getHexCar(parseInt(num.subBitArray(0, start)));
+			result += hexAlphabet.getElement(parseInt(num.subBitArray(0, start)));
 		for(; start < num.size(); start += 4)
-			result += getHexCar(parseInt(num.subBitArray(start, start + 4)));
+			result += hexAlphabet.getElement(parseInt(num.subBitArray(start, start + 4)));
 		return result;
 	}
 	
-	public static char getHexCar(int dig) {
-		if(dig > 9)
-			return (char)('a' + (dig - 10));
-		return (char)('0' + dig);
+	public static BitArray hexStringToBitArray(String hex) {
+		BitArray result = new BitArray("");
+		for(int i = 0; i < hex.length(); ++i)
+			result.add(parseBitArray(hexAlphabet.getIndex(hex.charAt(i)), 4));
+		return result;
 	}
-	
+
 	public static BitArray[] divide(int n, BitArray values) {
 		BitArray[] parts = new BitArray[n];
 		int size = values.size() / n;

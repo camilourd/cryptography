@@ -6,7 +6,7 @@ import unalcol.types.collection.bitarray.BitArray;
 import cryptosystem.ciphers.des.DES;
 import tools.BitArrayTools;
 
-public class DESCipher extends Cryptosystem<BitArray, String> {
+public class DESCipher extends Cryptosystem<BitArray, String, Character> {
 
 	public final static int ENCODE = 1;
 	public final static int DECODE = 2;
@@ -22,7 +22,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 	public String encode(BitArray key, String message) {
 		if(isValidKey(key)) {
 			while((message.length() * 6) % des.getBlockSize() > 0)
-				message += alphabet.getCharacter((int)(Math.random() * alphabet.size()));
+				message += alphabet.getElement((int)(Math.random() * alphabet.size()));
 			return runDES(ENCODE, key, message);
 		}
 		return message;
@@ -37,7 +37,7 @@ public class DESCipher extends Cryptosystem<BitArray, String> {
 				save.add(runMethod(method, key, code.subBitArray(0, des.getBlockSize())));
 				int n = save.size() / 6;
 				for(int k = 0; k < n; ++k)
-					result[j++] = alphabet.getCharacter(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
+					result[j++] = alphabet.getElement(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
 				code = code.subBitArray(des.getBlockSize());
 				save = save.subBitArray(n * 6);
 			}

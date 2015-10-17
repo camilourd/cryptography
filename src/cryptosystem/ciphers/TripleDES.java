@@ -2,9 +2,10 @@ package cryptosystem.ciphers;
 
 import alphabet.alphabets.ExtendedAlphabet;
 import cryptosystem.Cryptosystem;
+import types.Pair;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class TripleDES extends Cryptosystem<BitArray[], String> {
+public class TripleDES extends Cryptosystem<Pair<BitArray, BitArray>, String, Character> {
 
 	protected DESCipher cipher;
 	
@@ -14,29 +15,27 @@ public class TripleDES extends Cryptosystem<BitArray[], String> {
 	}
 
 	@Override
-	public String encode(BitArray[] key, String message) {
+	public String encode(Pair<BitArray, BitArray> key, String message) {
 		if(isValidKey(key))
-			return cipher.encode(key[0], cipher.decode(key[1], cipher.encode(key[0], message)));
+			return cipher.encode(key.first, cipher.decode(key.second, cipher.encode(key.first, message)));
 		return message;
 	}
 
 	@Override
-	public String decode(BitArray[] key, String message) {
+	public String decode(Pair<BitArray, BitArray> key, String message) {
 		if(isValidKey(key))
-			return cipher.decode(key[0], cipher.encode(key[1], cipher.decode(key[0], message)));
+			return cipher.decode(key.first, cipher.encode(key.second, cipher.decode(key.first, message)));
 		return message;
 	}
 
 	@Override
-	public boolean isValidKey(BitArray[] key) {
-		return key.length == 2 && cipher.isValidKey(key[0]) && cipher.isValidKey(key[1]);
+	public boolean isValidKey(Pair<BitArray, BitArray> key) {
+		return cipher.isValidKey(key.first) && cipher.isValidKey(key.second);
 	}
 
 	@Override
-	public BitArray[] generateKey() {
-		BitArray[] key = new BitArray[2];
-		key[0] = cipher.generateKey();
-		key[1] = cipher.generateKey();
+	public Pair<BitArray, BitArray> generateKey() {
+		Pair<BitArray, BitArray> key = new Pair<BitArray, BitArray>(cipher.generateKey(), cipher.generateKey());
 		return key;
 	}
 

@@ -3,9 +3,9 @@ package cryptosystem.ciphers;
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 
-public class CaesarCipher extends Cryptosystem<Integer, String> {
+public class CaesarCipher extends Cryptosystem<Integer, String, Character> {
 
-	public CaesarCipher(Alphabet alphabet) {
+	public CaesarCipher(Alphabet<Character> alphabet) {
 		super(alphabet);
 	}
 
@@ -13,7 +13,7 @@ public class CaesarCipher extends Cryptosystem<Integer, String> {
 	public String encode(Integer shift, String message) {
 		char[] result = message.toCharArray();
 		for(int i = 0; i < result.length; ++i)
-			result[i] = alphabet.getCharacter(alphabet.getIndex(result[i]) + shift);
+			result[i] = alphabet.getElement(alphabet.getIndex(result[i]) + shift);
 		return new String(result);
 	}
 
@@ -21,7 +21,7 @@ public class CaesarCipher extends Cryptosystem<Integer, String> {
 	public String decode(Integer shift, String message) {
 		char[] result = message.toCharArray();
 		for(int i = 0; i < result.length; ++i)
-			result[i] = alphabet.getCharacter(alphabet.getIndex(result[i]) - shift);
+			result[i] = alphabet.getElement(alphabet.getIndex(result[i]) - shift);
 		return new String(result);
 	}
 
