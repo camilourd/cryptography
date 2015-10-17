@@ -24,11 +24,9 @@ public class AffineCipherTest extends CryptosystemTest<Pair<Integer, Integer>, S
 			String output = cryptosystem.encode(key, message);	
 			assertEquals(message, cryptosystem.decode(key, output));
 			
-			if(cryptosystem.isValidKey(key)) {
-				assertNotEquals(message, output);
+			if(cryptosystem.isValidKey(key))
 				for(int j = 0; j < message.length(); ++j)
 					assertEquals(output.charAt(j), (char)alphabet.getElement((key.first * alphabet.getIndex(message.charAt(j))) + key.second));
-			}
 			else
 				assertEquals(message, output);
 		}

@@ -3,11 +3,11 @@ package test.cryptosystem.ciphers;
 import static org.junit.Assert.*;
 
 import cryptosystem.ciphers.AESCipher;
-import test.cryptosystem.CryptosystemTest;
+import test.cryptosystem.BlockCryptosystemTest;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class AESCipherTest extends CryptosystemTest<BitArray, String, Character> {
+public class AESCipherTest extends BlockCryptosystemTest<BitArray, String, Character, BitArray> {
 	
 	public AESCipherTest() {
 		super(new AESCipher(128, 283));

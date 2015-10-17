@@ -1,71 +1,43 @@
 package cryptosystem.ciphers;
 
+import alphabet.alphabets.CharacterAlphabet;
 import alphabet.alphabets.ExtendedAlphabet;
-import cryptosystem.Cryptosystem;
-import unalcol.types.collection.bitarray.BitArray;
+import alphabet.alphabets.HexadecimalAlphabet;
+import cryptosystem.BlockCryptosystem;
 import cryptosystem.ciphers.des.DES;
+import cryptosystem.ciphers.des.StringBitArraySubstitution;
+import unalcol.types.collection.bitarray.BitArray;
 import tools.BitArrayTools;
 
-public class DESCipher extends Cryptosystem<BitArray, String, Character> {
-
-	public final static int ENCODE = 1;
-	public final static int DECODE = 2;
+public class DESCipher extends BlockCryptosystem<BitArray, String, Character, BitArray> {
 	
-	protected DES des;
+	protected int blockSize;
 	
 	public DESCipher() {
-		super(new ExtendedAlphabet());
-		des = new DES();
+		super(new DES(), new StringBitArraySubstitution(new ExtendedAlphabet()),
+				new StringBitArraySubstitution(new HexadecimalAlphabet()));
+		this.blockSize = 64;
 	}
 
 	@Override
-	public String encode(BitArray key, String message) {
-		if(isValidKey(key)) {
-			while((message.length() * 6) % des.getBlockSize() > 0)
-				message += alphabet.getElement((int)(Math.random() * alphabet.size()));
-			return runDES(ENCODE, key, message);
-		}
-		return message;
-	}
-
-	private String runDES(int method, BitArray key, String message) {
-		char[] result = message.toCharArray();
-		BitArray code = new BitArray(0, false), save = new BitArray(0, false);
-		for(int i = 0, j = 0; i < result.length; ++i) {
-			code.add(BitArrayTools.parseBitArray(alphabet.getIndex(result[i]), 6));
-			if(code.size() >= des.getBlockSize()) {
-				save.add(runMethod(method, key, code.subBitArray(0, des.getBlockSize())));
-				int n = save.size() / 6;
-				for(int k = 0; k < n; ++k)
-					result[j++] = alphabet.getElement(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
-				code = code.subBitArray(des.getBlockSize());
-				save = save.subBitArray(n * 6);
-			}
-		}
-		return new String(result);
-	}
-
-	protected BitArray runMethod(int method, BitArray key, BitArray code) {
-		if(method == ENCODE)
-			return des.encode(key, code);
-		return des.decode(key, code);
-	}
-
-	@Override
-	public String decode(BitArray key, String message) {
-		if(isValidKey(key))
-			return runDES(DECODE ,key, message);
+	public String complete(String message) {
+		CharacterAlphabet alphabet = (CharacterAlphabet) encodingSubstitution.getAlphabet();
+		while((message.length() * 6) % blockSize > 0)
+			message += alphabet.getElement((int)(Math.random() * alphabet.size()));
 		return message;
 	}
 
 	@Override
-	public boolean isValidKey(BitArray key) {
-		return des.isValidKey(key);
+	public BitArray[] divide(BitArray message) {
+		return BitArrayTools.divide(message.size() / blockSize, message);
 	}
 
 	@Override
-	public BitArray generateKey() {
-		return des.generateKey();
+	public BitArray merge(BitArray[] blocks) {
+		BitArray result = new BitArray("");
+		for(BitArray block: blocks)
+			result.add(block);
+		return result;
 	}
 
 }

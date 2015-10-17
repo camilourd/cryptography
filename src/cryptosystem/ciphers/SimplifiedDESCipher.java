@@ -6,7 +6,8 @@ public class SimplifiedDESCipher extends DESCipher {
 
 	public SimplifiedDESCipher() {
 		super();
-		des = new SimplifiedDES();
+		cryptosystem = new SimplifiedDES();
+		this.blockSize = 12;
 	}
 	
 }

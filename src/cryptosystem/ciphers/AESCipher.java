@@ -1,81 +1,49 @@
 package cryptosystem.ciphers;
 
+import alphabet.alphabets.CharacterAlphabet;
 import alphabet.alphabets.ExtendedAlphabet;
-import cryptosystem.Cryptosystem;
+import alphabet.alphabets.HexadecimalAlphabet;
+import cryptosystem.BlockCryptosystem;
 import cryptosystem.ciphers.aes.AES;
-import cryptosystem.ciphers.aes.KeyGenerator;
-import cryptosystem.ciphers.aes.StateArray;
+import cryptosystem.ciphers.des.StringBitArraySubstitution;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class AESCipher extends Cryptosystem<BitArray, String, Character> {
+public class AESCipher extends BlockCryptosystem<BitArray, String, Character, BitArray> {
 
 	protected int keyLenght;
 	protected int polynomial;
+	protected int blockSize;
 	protected AES aes;
 	
-	public final static int ENCODE = 1;
-	public final static int DECODE = 2;
-	
 	public AESCipher(int keyLenght, int polynomial) {
-		super(new ExtendedAlphabet());
+		super(new AES(keyLenght, polynomial), new StringBitArraySubstitution(new ExtendedAlphabet()),
+				new StringBitArraySubstitution(new HexadecimalAlphabet()));
 		this.keyLenght = keyLenght;
 		this.polynomial = polynomial;
 		aes = new AES(keyLenght, polynomial);
+		this.blockSize = 128;
 	}
 
 	@Override
-	public String encode(BitArray key, String message) {
-		if(isValidKey(key)) {
-			while((message.length() * 6) % 128 > 0)
-				message += alphabet.getElement((int)(Math.random() * alphabet.size()));
-			BitArray[] keys = KeyGenerator.generate(key, aes.getSubstitution());
-			return runAES(ENCODE, keys, message);
-		}
-		return message;
-	}
-	
-	private String runAES(int method, BitArray[] key, String message) {
-		char[] result = message.toCharArray();
-		BitArray code = new BitArray(0, false), save = new BitArray(0, false);
-		for(int i = 0, j = 0; i < result.length; ++i) {
-			code.add(BitArrayTools.parseBitArray(alphabet.getIndex(result[i]), 6));
-			if(code.size() >= 128) {
-				save.add(runMethod(method, key, code.subBitArray(0, 128)));
-				int n = save.size() / 6;
-				for(int k = 0; k < n; ++k)
-					result[j++] = alphabet.getElement(BitArrayTools.parseInt(save.subBitArray(k * 6, (k + 1) * 6)));
-				code = code.subBitArray(128);
-				save = save.subBitArray(n * 6);
-			}
-		}
-		return new String(result);
-	}
-	
-	protected BitArray runMethod(int method, BitArray[] key, BitArray code) {
-		StateArray state = new StateArray(code, polynomial);
-		if(method == ENCODE)
-			return aes.encode(key, state).getOutput();
-		return aes.decode(key, state).getOutput();
-	}
-
-	@Override
-	public String decode(BitArray key, String message) {
-		if(isValidKey(key)) {
-			BitArray[] keys = KeyGenerator.generate(key, aes.getSubstitution());
-			return runAES(DECODE ,keys, message);
-		}
+	public String complete(String message) {
+		CharacterAlphabet alphabet = (CharacterAlphabet) encodingSubstitution.getAlphabet();
+		while((message.length() * 6) % blockSize > 0)
+			message += alphabet.getElement((int)(Math.random() * alphabet.size()));
 		return message;
 	}
 
 	@Override
-	public boolean isValidKey(BitArray key) {
-		return key.size() == keyLenght;
+	public BitArray[] divide(BitArray message) {
+		return BitArrayTools.divide(message.size() / blockSize, message);
 	}
 
 	@Override
-	public BitArray generateKey() {
-		return BitArrayTools.generate(keyLenght);
+	public BitArray merge(BitArray[] blocks) {
+		BitArray result = new BitArray("");
+		for(BitArray block: blocks)
+			result.add(block);
+		return result;
 	}
 
 }

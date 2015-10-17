@@ -1,17 +1,17 @@
 package cryptosystem.ciphers.des;
 
-import alphabet.alphabets.BinaryAlphabet;
+import alphabet.alphabets.CharacterAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class DES extends Cryptosystem<BitArray, BitArray, Boolean> {
+public class DES extends Cryptosystem<BitArray, BitArray, Character> {
 	
 	protected int keySize;
 	protected int blockSize;
 	
 	public DES() {
-		super(new BinaryAlphabet());
+		super(new CharacterAlphabet("01"));
 		this.keySize = 64;
 		this.blockSize = 64;
 	}

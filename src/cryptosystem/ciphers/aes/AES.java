@@ -1,11 +1,11 @@
 package cryptosystem.ciphers.aes;
 
-import alphabet.alphabets.BinaryAlphabet;
+import alphabet.alphabets.CharacterAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;;
 
-public class AES extends Cryptosystem<BitArray[], StateArray, Boolean> {
+public class AES extends Cryptosystem<BitArray, BitArray, Character> {
 	
 	protected int blockSize;
 	protected int nk, nr, nb = 4;
@@ -25,9 +25,9 @@ public class AES extends Cryptosystem<BitArray[], StateArray, Boolean> {
 	};
 
 	public AES(int keyLenght, int polynomial) {
-		super(new BinaryAlphabet());
+		super(new CharacterAlphabet("01"));
 		this.blockSize = keyLenght;
-		this.nk = keyLenght / 32;
+		this.nk = keyLenght >> 5;
 		this.nr = this.nk + 6;
 		this.polynomial = polynomial;
 		this.substitution = new StateSubstitution(99, polynomial);
@@ -38,18 +38,20 @@ public class AES extends Cryptosystem<BitArray[], StateArray, Boolean> {
 	}
 
 	@Override
-	public StateArray encode(BitArray key[], StateArray state) {
-		addRoundKey(state, key, 0);
+	public BitArray encode(BitArray key, BitArray input) {
+		BitArray[] keys = KeyGenerator.generate(key, substitution);
+		StateArray state = new StateArray(input, polynomial);
+		addRoundKey(state, keys, 0);
 		for(int round = 1; round < nr; ++round) {
 			subBytes(state, StateSubstitution.SUBSTITUTE);
 			shiftRows(state, StateArray.LEFT_SHIFT);
 			state.multiplyColumns(matrixMultiplication, polynomial);
-			addRoundKey(state, key, round * nb);
+			addRoundKey(state, keys, round * nb);
 		}
 		subBytes(state, StateSubstitution.SUBSTITUTE);
 		shiftRows(state, StateArray.LEFT_SHIFT);
-		addRoundKey(state, key, nr * nb);
-		return state;
+		addRoundKey(state, keys, nr * nb);
+		return state.getOutput();
 	}
 
 	public void addRoundKey(StateArray state, BitArray[] key, int i) {
@@ -73,33 +75,30 @@ public class AES extends Cryptosystem<BitArray[], StateArray, Boolean> {
 	}
 
 	@Override
-	public StateArray decode(BitArray key[], StateArray state) {
-		addRoundKey(state, key, nr * nb);
+	public BitArray decode(BitArray key, BitArray input) {
+		BitArray[] keys = KeyGenerator.generate(key, substitution);
+		StateArray state = new StateArray(input, polynomial);
+		addRoundKey(state, keys, nr * nb);
 		for(int round = nr - 1; round > 0; --round) {
 			shiftRows(state, StateArray.RIGHT_SHIFT);
 			subBytes(state, StateSubstitution.RESTORE);
-			addRoundKey(state, key, round * nb);
+			addRoundKey(state, keys, round * nb);
 			state.multiplyColumns(invMatrixMultiplication, polynomial);
 		}
 		shiftRows(state, StateArray.RIGHT_SHIFT);
 		subBytes(state, StateSubstitution.RESTORE);
-		addRoundKey(state, key, 0);
-		return state;
+		addRoundKey(state, keys, 0);
+		return state.getOutput();
 	}
 
 	@Override
-	public boolean isValidKey(BitArray key[]) {
-		if(key.length != nb*(nr + 1))
-			return false;
-		for(int i = 0; i < key.length; ++i)
-			if(key[i].size() != 32)
-				return false;
-		return true;
+	public boolean isValidKey(BitArray key) {
+		return key.size() == nk << 5;
 	}
 
 	@Override
-	public BitArray[] generateKey() {
-		return KeyGenerator.generate(BitArrayTools.generate(nk * 32), substitution);
+	public BitArray generateKey() {
+		return BitArrayTools.generate(nk << 5);
 	}
 
 }
