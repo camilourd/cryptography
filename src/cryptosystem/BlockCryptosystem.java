@@ -19,25 +19,25 @@ public abstract class BlockCryptosystem<K, M, B> implements CipherFunction<K, M>
 	@Override
 	public M encode(K key, M message) {
 		if(isValidKey(key)) {
-			B[] blocks = divide(encodingSubstitution.substitute(complete(message)));
+			B[] blocks = divide(key, encodingSubstitution.substitute(complete(key, message)));
 			for(B block: blocks)
 				block = cryptosystem.encode(key, block);
-			return decodingSubstitution.restore(merge(blocks));
+			return decodingSubstitution.restore(merge(key, blocks));
 		}
 		return message;
 	}
 	
-	public abstract M complete(M message);
-	public abstract B[] divide(B message);
-	public abstract B merge(B[] blocks);
+	public abstract M complete(K key, M message);
+	public abstract B[] divide(K key, B message);
+	public abstract B merge(K key, B[] blocks);
 
 	@Override
 	public M decode(K key, M message) {
 		if(isValidKey(key)) {
-			B[] blocks = divide(decodingSubstitution.substitute(message));
+			B[] blocks = divide(key, decodingSubstitution.substitute(message));
 			for(B block: blocks)
 				block = cryptosystem.decode(key, block);
-			return encodingSubstitution.restore(merge(blocks));
+			return encodingSubstitution.restore(merge(key, blocks));
 		}
 		return message;
 	}

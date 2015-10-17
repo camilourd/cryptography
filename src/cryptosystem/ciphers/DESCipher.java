@@ -20,7 +20,7 @@ public class DESCipher extends BlockCryptosystem<BitArray, String, BitArray> {
 	}
 
 	@Override
-	public String complete(String message) {
+	public String complete(BitArray key, String message) {
 		StringAlphabet alphabet = (StringAlphabet) encodingSubstitution.getAlphabet();
 		while((message.length() * 6) % blockSize > 0)
 			message += alphabet.getElement((int)(Math.random() * alphabet.size()));
@@ -28,12 +28,12 @@ public class DESCipher extends BlockCryptosystem<BitArray, String, BitArray> {
 	}
 
 	@Override
-	public BitArray[] divide(BitArray message) {
+	public BitArray[] divide(BitArray key, BitArray message) {
 		return BitArrayTools.divide(message.size() / blockSize, message);
 	}
 
 	@Override
-	public BitArray merge(BitArray[] blocks) {
+	public BitArray merge(BitArray key, BitArray[] blocks) {
 		BitArray result = new BitArray("");
 		for(BitArray block: blocks)
 			result.add(block);
