@@ -8,7 +8,7 @@ import alphabet.alphabets.EnglishAlphabet;
 import cryptosystem.ciphers.CaesarCipher;
 import test.cryptosystem.CryptosystemTest;
 
-public class CaesarCipherTest extends CryptosystemTest<Integer, String, Character> {
+public class CaesarCipherTest extends CryptosystemTest<Integer, String> {
 	
 	ArrayList<Integer> shifts;
 	

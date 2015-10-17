@@ -7,7 +7,7 @@ import test.cryptosystem.BlockCryptosystemTest;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class AESCipherTest extends BlockCryptosystemTest<BitArray, String, Character, BitArray> {
+public class AESCipherTest extends BlockCryptosystemTest<BitArray, String, BitArray> {
 	
 	public AESCipherTest() {
 		super(new AESCipher(128, 283));

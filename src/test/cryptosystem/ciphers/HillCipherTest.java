@@ -7,7 +7,7 @@ import cryptosystem.ciphers.HillCipher;
 import flanagan.math.Matrix;
 import test.cryptosystem.CryptosystemTest;
 
-public class HillCipherTest extends CryptosystemTest<Matrix, String, Character> {
+public class HillCipherTest extends CryptosystemTest<Matrix, String> {
 
 	public HillCipherTest() {
 		super(new HillCipher(new EnglishAlphabet()));

@@ -7,7 +7,7 @@ import test.cryptosystem.CryptosystemTest;
 import types.Pair;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class TripleDESTest extends CryptosystemTest<Pair<BitArray, BitArray>, String, Character> {
+public class TripleDESTest extends CryptosystemTest<Pair<BitArray, BitArray>, String> {
 
 	Pair<BitArray, BitArray> key;
 

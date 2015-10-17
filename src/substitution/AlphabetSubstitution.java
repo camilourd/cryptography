@@ -2,15 +2,15 @@ package substitution;
 
 import alphabet.Alphabet;
 
-public abstract class AlphabetSubstitution<V, S, C> implements SubstitutionFunction<V, S> {
+public abstract class AlphabetSubstitution<V, S> implements SubstitutionFunction<V, S> {
 	
-	protected Alphabet<C> alphabet;
+	protected Alphabet alphabet;
 
-	public AlphabetSubstitution(Alphabet<C> alphabet) {
+	public AlphabetSubstitution(Alphabet alphabet) {
 		this.alphabet = alphabet;
 	}
 
-	public Alphabet<C> getAlphabet() {
+	public Alphabet getAlphabet() {
 		return alphabet;
 	}
 

@@ -1,11 +1,11 @@
 package cryptosystem.ciphers.aes;
 
-import alphabet.alphabets.CharacterAlphabet;
+import alphabet.alphabets.BinaryAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;;
 
-public class AES extends Cryptosystem<BitArray, BitArray, Character> {
+public class AES extends Cryptosystem<BitArray, BitArray> {
 	
 	protected int blockSize;
 	protected int nk, nr, nb = 4;
@@ -25,7 +25,7 @@ public class AES extends Cryptosystem<BitArray, BitArray, Character> {
 	};
 
 	public AES(int keyLenght, int polynomial) {
-		super(new CharacterAlphabet("01"));
+		super(new BinaryAlphabet());
 		this.blockSize = keyLenght;
 		this.nk = keyLenght >> 5;
 		this.nr = this.nk + 6;

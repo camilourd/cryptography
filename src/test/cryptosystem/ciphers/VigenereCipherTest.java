@@ -6,7 +6,7 @@ import alphabet.alphabets.EnglishAlphabet;
 import cryptosystem.ciphers.VigenereCipher;
 import test.cryptosystem.CryptosystemTest;
 
-public class VigenereCipherTest extends CryptosystemTest<String, String, Character> {
+public class VigenereCipherTest extends CryptosystemTest<String, String> {
 
 	public VigenereCipherTest() {
 		super(new VigenereCipher(new EnglishAlphabet()));

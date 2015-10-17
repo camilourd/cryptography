@@ -5,7 +5,7 @@ import cryptosystem.Cryptosystem;
 import types.Pair;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class TripleDES extends Cryptosystem<Pair<BitArray, BitArray>, String, Character> {
+public class TripleDES extends Cryptosystem<Pair<BitArray, BitArray>, String> {
 
 	protected DESCipher cipher;
 	

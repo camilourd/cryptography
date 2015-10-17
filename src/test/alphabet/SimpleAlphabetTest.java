@@ -3,15 +3,15 @@ package test.alphabet;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import alphabet.alphabets.CharacterAlphabet;
+import alphabet.alphabets.StringAlphabet;
 
 public class SimpleAlphabetTest {
 
-	CharacterAlphabet alphabet;
+	StringAlphabet alphabet;
 	char[] cars;
 	
 	public SimpleAlphabetTest() {
-		alphabet = new CharacterAlphabet("aby574ok-,;");
+		alphabet = new StringAlphabet("aby574ok-,;");
 		cars = alphabet.getCharacters();
 	}
 	

@@ -5,12 +5,12 @@ import org.junit.Test;
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 
-public abstract class CryptosystemTest<K, M, C> {
+public abstract class CryptosystemTest<K, M> {
 
-	protected Alphabet<C> alphabet;
-	protected Cryptosystem<K, M, C> cryptosystem;
+	protected Alphabet alphabet;
+	protected Cryptosystem<K, M> cryptosystem;
 	
-	public CryptosystemTest(Cryptosystem<K, M, C> cryptosystem) {
+	public CryptosystemTest(Cryptosystem<K, M> cryptosystem) {
 		this.cryptosystem = cryptosystem;
 		this.alphabet = cryptosystem.getAlphabet();
 	}

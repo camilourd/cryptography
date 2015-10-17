@@ -1,9 +1,9 @@
 package alphabet;
 
-public interface Alphabet<M> {
+public interface Alphabet {
 	
-	public int getIndex(M car);
-	public M getElement(int index);
+	public int getIndex(char car);
+	public char getElement(int index);
 	public int size();
 	
 }

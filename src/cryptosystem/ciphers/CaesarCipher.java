@@ -3,9 +3,9 @@ package cryptosystem.ciphers;
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 
-public class CaesarCipher extends Cryptosystem<Integer, String, Character> {
+public class CaesarCipher extends Cryptosystem<Integer, String> {
 
-	public CaesarCipher(Alphabet<Character> alphabet) {
+	public CaesarCipher(Alphabet alphabet) {
 		super(alphabet);
 	}
 

@@ -6,7 +6,7 @@ import cryptosystem.ciphers.SimplifiedDESCipher;
 import test.cryptosystem.BlockCryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class SimplifiedDESCipherTest extends BlockCryptosystemTest<BitArray, String, Character, BitArray> {
+public class SimplifiedDESCipherTest extends BlockCryptosystemTest<BitArray, String, BitArray> {
 
 	public BitArray key;
 	

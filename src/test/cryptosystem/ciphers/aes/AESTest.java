@@ -7,7 +7,7 @@ import test.cryptosystem.CryptosystemTest;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class AESTest extends CryptosystemTest<BitArray, BitArray, Character> {
+public class AESTest extends CryptosystemTest<BitArray, BitArray> {
 
 	public static int polynomial = 283;
 	

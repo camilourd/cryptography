@@ -9,9 +9,9 @@ import math.ModularArithmetic;
 import tools.MathTools;
 import types.Pair;
 
-public class AffineCipher extends Cryptosystem<Pair<Integer, Integer>, String, Character> {
+public class AffineCipher extends Cryptosystem<Pair<Integer, Integer>, String> {
 
-	public AffineCipher(Alphabet<Character> alphabet) {
+	public AffineCipher(Alphabet alphabet) {
 		super(alphabet);
 	}
 

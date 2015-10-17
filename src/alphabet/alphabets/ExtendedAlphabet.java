@@ -1,6 +1,6 @@
 package alphabet.alphabets;
 
-public class ExtendedAlphabet extends CharacterAlphabet {
+public class ExtendedAlphabet extends StringAlphabet {
 
 	public ExtendedAlphabet() {
 		super("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,;:()+-*/%={}[]?'<>!|&_");

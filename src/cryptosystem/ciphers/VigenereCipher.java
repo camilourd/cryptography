@@ -3,9 +3,9 @@ package cryptosystem.ciphers;
 import alphabet.Alphabet;
 import cryptosystem.Cryptosystem;
 
-public class VigenereCipher extends Cryptosystem<String, String, Character> {
+public class VigenereCipher extends Cryptosystem<String, String> {
 
-	public VigenereCipher(Alphabet<Character> alphabet) {
+	public VigenereCipher(Alphabet alphabet) {
 		super(alphabet);
 	}
 

@@ -2,15 +2,15 @@ package cryptosystem;
 
 import substitution.AlphabetSubstitution;
 
-public abstract class BlockCryptosystem<K, M, C, B> implements CipherFunction<K, M> {
+public abstract class BlockCryptosystem<K, M, B> implements CipherFunction<K, M> {
 	
-	protected Cryptosystem<K, B, C> cryptosystem;
-	protected AlphabetSubstitution<M, B, C> encodingSubstitution;
-	protected AlphabetSubstitution<M, B, C> decodingSubstitution;
+	protected Cryptosystem<K, B> cryptosystem;
+	protected AlphabetSubstitution<M, B> encodingSubstitution;
+	protected AlphabetSubstitution<M, B> decodingSubstitution;
 	
-	public BlockCryptosystem(Cryptosystem<K, B, C> cryptosystem,
-			AlphabetSubstitution<M, B, C> encodingSubstitution,
-			AlphabetSubstitution<M, B, C> decodingSubstitution) {
+	public BlockCryptosystem(Cryptosystem<K, B> cryptosystem,
+			AlphabetSubstitution<M, B> encodingSubstitution,
+			AlphabetSubstitution<M, B> decodingSubstitution) {
 		this.cryptosystem = cryptosystem;
 		this.encodingSubstitution = encodingSubstitution;
 		this.decodingSubstitution = decodingSubstitution;

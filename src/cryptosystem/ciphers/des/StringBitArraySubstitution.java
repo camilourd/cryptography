@@ -1,15 +1,15 @@
 package cryptosystem.ciphers.des;
 
-import alphabet.alphabets.CharacterAlphabet;
+import alphabet.alphabets.StringAlphabet;
 import substitution.AlphabetSubstitution;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class StringBitArraySubstitution extends AlphabetSubstitution<String, BitArray, Character> {
+public class StringBitArraySubstitution extends AlphabetSubstitution<String, BitArray> {
 
 	protected int bits = 0;
 	
-	public StringBitArraySubstitution(CharacterAlphabet alphabet) {
+	public StringBitArraySubstitution(StringAlphabet alphabet) {
 		super(alphabet);
 		for(int c = 1; c < alphabet.size(); c <<= 1)
 			++bits;

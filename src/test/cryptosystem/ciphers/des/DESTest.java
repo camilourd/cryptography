@@ -6,7 +6,7 @@ import cryptosystem.ciphers.des.DES;
 import test.cryptosystem.CryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class DESTest extends CryptosystemTest<BitArray, BitArray, Character> {
+public class DESTest extends CryptosystemTest<BitArray, BitArray> {
 	
 	public BitArray key, input;
 	

@@ -1,14 +1,14 @@
 package cryptosystem.ciphers;
 
 import alphabet.Alphabet;
-import alphabet.alphabets.CharacterAlphabet;
+import alphabet.alphabets.StringAlphabet;
 import cryptosystem.Cryptosystem;
 import substitution.Substitution;
 import tools.ArrayTools;
 
-public class SimpleSubstitutionCipher extends Cryptosystem<Substitution<Character, Character>, String, Character> {
+public class SimpleSubstitutionCipher extends Cryptosystem<Substitution<Character, Character>, String> {
 
-	public SimpleSubstitutionCipher(Alphabet<Character> alphabet) {
+	public SimpleSubstitutionCipher(Alphabet alphabet) {
 		super(alphabet);
 	}
 
@@ -38,7 +38,7 @@ public class SimpleSubstitutionCipher extends Cryptosystem<Substitution<Characte
 
 	@Override
 	public Substitution<Character, Character> generateKey() {
-		char[] cars = ((CharacterAlphabet)alphabet).getCharacters();
+		char[] cars = ((StringAlphabet)alphabet).getCharacters();
 		ArrayTools.mixElements(cars);
 		Substitution<Character, Character> substitution = new Substitution<Character, Character>();
 		for(int i = 0;i < cars.length; ++i)

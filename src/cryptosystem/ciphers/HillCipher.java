@@ -6,9 +6,9 @@ import flanagan.math.Matrix;
 import math.Arithmetic;
 import math.ModularArithmetic;
 
-public class HillCipher extends Cryptosystem<Matrix, String, Character> {
+public class HillCipher extends Cryptosystem<Matrix, String> {
 
-	public HillCipher(Alphabet<Character> alphabet) {
+	public HillCipher(Alphabet alphabet) {
 		super(alphabet);
 	}
 

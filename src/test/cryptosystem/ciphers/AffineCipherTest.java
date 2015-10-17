@@ -10,7 +10,7 @@ import math.Arithmetic;
 import test.cryptosystem.CryptosystemTest;
 import types.Pair;
 
-public class AffineCipherTest extends CryptosystemTest<Pair<Integer, Integer>, String, Character> {
+public class AffineCipherTest extends CryptosystemTest<Pair<Integer, Integer>, String> {
 
 	public AffineCipherTest() {
 		super(new AffineCipher(new EnglishAlphabet()));

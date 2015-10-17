@@ -1,6 +1,6 @@
 package cryptosystem.ciphers;
 
-import alphabet.alphabets.CharacterAlphabet;
+import alphabet.alphabets.StringAlphabet;
 import alphabet.alphabets.ExtendedAlphabet;
 import alphabet.alphabets.HexadecimalAlphabet;
 import cryptosystem.BlockCryptosystem;
@@ -9,7 +9,7 @@ import cryptosystem.ciphers.des.StringBitArraySubstitution;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class AESCipher extends BlockCryptosystem<BitArray, String, Character, BitArray> {
+public class AESCipher extends BlockCryptosystem<BitArray, String, BitArray> {
 
 	protected int keyLenght;
 	protected int polynomial;
@@ -27,7 +27,7 @@ public class AESCipher extends BlockCryptosystem<BitArray, String, Character, Bi
 
 	@Override
 	public String complete(String message) {
-		CharacterAlphabet alphabet = (CharacterAlphabet) encodingSubstitution.getAlphabet();
+		StringAlphabet alphabet = (StringAlphabet) encodingSubstitution.getAlphabet();
 		while((message.length() * 6) % blockSize > 0)
 			message += alphabet.getElement((int)(Math.random() * alphabet.size()));
 		return message;

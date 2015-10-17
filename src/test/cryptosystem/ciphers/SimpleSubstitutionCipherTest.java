@@ -9,7 +9,7 @@ import cryptosystem.ciphers.SimpleSubstitutionCipher;
 import substitution.Substitution;
 import test.cryptosystem.CryptosystemTest;
 
-public class SimpleSubstitutionCipherTest extends CryptosystemTest<Substitution<Character, Character>, String, Character> {
+public class SimpleSubstitutionCipherTest extends CryptosystemTest<Substitution<Character, Character>, String> {
 
 	protected Substitution<Character, Character> substitution;
 	
