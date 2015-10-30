@@ -10,7 +10,7 @@ import unalcol.types.collection.bitarray.BitArray;
 public class AESCipherTest extends BlockCryptosystemTest<BitArray, String, BitArray> {
 	
 	public AESCipherTest() {
-		super(new AESCipher(128, 283));
+		super(new AESCipher(128, 299));
 	}
 
 	@Override

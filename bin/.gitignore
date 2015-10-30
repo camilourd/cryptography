@@ -1,7 +1,7 @@
-/cryptosystem/
-/tools/
-/test/
-/math/
 /alphabet/
-/types/
+/cryptosystem/
+/math/
 /substitution/
+/test/
+/tools/
+/types/

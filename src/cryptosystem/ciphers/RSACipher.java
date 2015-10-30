@@ -36,9 +36,14 @@ public class RSACipher extends BlockCryptosystem<RSAKey, String, BigInteger> {
 
 	@Override
 	public BigInteger merge(RSAKey key, BigInteger[] blocks) {
+		int blockSize = key.publicKey.n.toString().length() - 1;
 		String result = "";
-		for(BigInteger block: blocks)
-			result = block.toString() + result;
+		for(BigInteger block: blocks) {
+			String aux = block.toString();
+			while(aux.length() < blockSize)
+				aux = "0" + aux;
+			result = aux + result;
+		}
 		return new BigInteger(result);
 	}
 	
