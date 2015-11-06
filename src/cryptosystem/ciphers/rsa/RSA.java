@@ -14,12 +14,12 @@ public class RSA extends Cryptosystem<RSAKey, BigInteger> {
 
 	@Override
 	public BigInteger encode(RSAKey key, BigInteger message) {
-		return message.modPow(key.privateKey.e, key.privateKey.n);
+		return message.modPow(key.publicKey.d, key.publicKey.n);
 	}
 
 	@Override
 	public BigInteger decode(RSAKey key, BigInteger message) {
-		return message.modPow(key.publicKey.d, key.publicKey.n);
+		return message.modPow(key.privateKey.e, key.privateKey.n);
 	}
 
 	@Override
