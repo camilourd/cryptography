@@ -2,6 +2,7 @@ package cryptosystem.ciphers.des;
 
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
+import unalcol.types.collection.vector.Vector;
 
 public class SimplifiedDES extends DES {
 	
@@ -33,24 +34,24 @@ public class SimplifiedDES extends DES {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = getEncryptKeys(key);
-			BitArray[] parts = BitArrayTools.divide(2, output);
+			Vector<BitArray> parts = BitArrayTools.divide(2, output);
 			for(int i = 0; i < subkeys.length; ++i)
 				calculateNextIteration(subkeys[i], parts);
 			swap(parts);
-			output = join(parts[0], parts[1]);
+			output = join(parts.get(0), parts.get(1));
 		}
 		return output;
 	}
 
-	private void calculateNextIteration(BitArray subkey, BitArray[] parts) {
-		BitArray result = expand(parts[1], EP);
+	private void calculateNextIteration(BitArray subkey, Vector<BitArray> parts) {
+		BitArray result = expand(parts.get(1), EP);
 		result.xor(subkey);
-		BitArray[] inputs = BitArrayTools.divide(S.length, result);
-		result = S[0].getEcoding((inputs[0].get(0))? 1:0, getInt(inputs[0].subBitArray(1)));
-		result.add(S[1].getEcoding((inputs[1].get(0))? 1:0, getInt(inputs[1].subBitArray(1))));
-		result.xor(parts[0]);
-		parts[0] = parts[1];
-		parts[1] = result;
+		Vector<BitArray> inputs = BitArrayTools.divide(S.length, result);
+		result = S[0].getEcoding((inputs.get(0).get(0))? 1:0, getInt(inputs.get(0).subBitArray(1)));
+		result.add(S[1].getEcoding((inputs.get(1).get(0))? 1:0, getInt(inputs.get(1).subBitArray(1))));
+		result.xor(parts.get(0));
+		parts.set(0, parts.get(1));
+		parts.set(1, result);
 	}
 	
 	private int getInt(BitArray bits) {
@@ -73,11 +74,11 @@ public class SimplifiedDES extends DES {
 		BitArray output = (BitArray) message.clone();
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = getEncryptKeys(key);
-			BitArray[] parts = BitArrayTools.divide(2, output);
+			Vector<BitArray> parts = BitArrayTools.divide(2, output);
 			for(int i = subkeys.length - 1; i >= 0 ; --i)
 				calculateNextIteration(subkeys[i], parts);
 			swap(parts);
-			output = join(parts[0], parts[1]);
+			output = join(parts.get(0), parts.get(1));
 		}
 		return output;
 	}

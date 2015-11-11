@@ -2,6 +2,7 @@ package cryptosystem.ciphers.des;
 
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
+import unalcol.types.collection.vector.Vector;
 
 public class DESGenerator {
 	
@@ -33,10 +34,10 @@ public class DESGenerator {
 	
 	
 	public static BitArray[] generateKeys(BitArray key) {
-		BitArray[] parts = BitArrayTools.divide(2, (PC1.substitute(key)).subBitArray(0, 56));
+		Vector<BitArray> parts = BitArrayTools.divide(2, (PC1.substitute(key)).subBitArray(0, 56));
 		BitArray[] keys = new BitArray[rotations.length];
 		for(int i = 0; i < rotations.length; ++i)
-			keys[i] = nextKey(i, parts[0], parts[1]);
+			keys[i] = nextKey(i, parts.get(0), parts.get(1));
 		return keys;
 	}
 	

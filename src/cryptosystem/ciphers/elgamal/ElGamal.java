@@ -25,7 +25,6 @@ public class ElGamal extends Cryptosystem<ElGamalKey, Pair<BigInteger, BigIntege
 
 	@Override
 	public Pair<BigInteger, BigInteger> decode(ElGamalKey key, Pair<BigInteger, BigInteger> message) {
-		//BigInteger r = Arithmetic.pow(message.first, key.privateKey.b);
 		BigInteger r = (message.first.modInverse(key.publicKey.p)).modPow(key.privateKey.b, key.publicKey.p);
 		return new Pair<BigInteger, BigInteger>(
 				message.first,

@@ -2,13 +2,18 @@ package cryptosystem.ciphers.rsa;
 
 import java.math.BigInteger;
 
-import alphabet.alphabets.NaturalAlphabet;
+import alphabet.alphabets.ExtendedAlphabet;
 import substitution.AlphabetSubstitution;
 
 public class NumberSubstitution extends AlphabetSubstitution<String, BigInteger> {
 
+	protected int digs = 1;
+	protected BigInteger div;
+	
 	public NumberSubstitution() {
-		super(new NaturalAlphabet());
+		super(new ExtendedAlphabet());
+		while(Math.pow(10, digs) <= alphabet.size()) ++digs;
+		div = BigInteger.TEN.pow(digs);
 	}
 
 	@Override
@@ -18,7 +23,13 @@ public class NumberSubstitution extends AlphabetSubstitution<String, BigInteger>
 
 	@Override
 	public String restore(BigInteger value) {
-		return value.toString();
+		String result = "";
+		while(!value.equals(BigInteger.ZERO)) {
+			int idx = value.mod(div).intValue();
+			value = value.divide(div);
+			result = alphabet.getElement(idx - 1) + result;
+		}
+		return result;
 	}
 
 }

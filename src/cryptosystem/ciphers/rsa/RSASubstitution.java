@@ -31,9 +31,8 @@ public class RSASubstitution extends AlphabetSubstitution<String, BigInteger> {
 	private String parseString(char car) {
 		String result = "";
 		int idx = alphabet.getIndex(car) + 1;
-		for(int i = 0; i < digs; ++i) {
+		for(int i = 0; i < digs; ++i, idx /= 10) {
 			int d = idx % 10;
-			idx /= 10;
 			result = ((char)('0' + d)) + result;
 		}
 		return result;
@@ -41,13 +40,7 @@ public class RSASubstitution extends AlphabetSubstitution<String, BigInteger> {
 
 	@Override
 	public String restore(BigInteger value) {
-		String result = "";
-		while(!value.equals(BigInteger.ZERO)) {
-			int idx = value.mod(div).intValue();
-			value = value.divide(div);
-			result = alphabet.getElement(idx - 1) + result;
-		}
-		return result;
+		return value.toString();
 	}
 
 }

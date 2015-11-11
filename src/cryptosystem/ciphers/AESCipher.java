@@ -2,12 +2,13 @@ package cryptosystem.ciphers;
 
 import alphabet.alphabets.StringAlphabet;
 import alphabet.alphabets.ExtendedAlphabet;
-import alphabet.alphabets.HexadecimalAlphabet;
 import cryptosystem.BlockCryptosystem;
 import cryptosystem.ciphers.aes.AES;
-import cryptosystem.ciphers.des.StringBitArraySubstitution;
+import cryptosystem.ciphers.des.DESDecodingSubstitution;
+import cryptosystem.ciphers.des.DESEncodingSubstitution;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
+import unalcol.types.collection.vector.Vector;
 
 public class AESCipher extends BlockCryptosystem<BitArray, String, BitArray> {
 
@@ -17,8 +18,8 @@ public class AESCipher extends BlockCryptosystem<BitArray, String, BitArray> {
 	protected AES aes;
 	
 	public AESCipher(int keyLenght, int polynomial) {
-		super(new AES(keyLenght, polynomial), new StringBitArraySubstitution(new ExtendedAlphabet()),
-				new StringBitArraySubstitution(new HexadecimalAlphabet()));
+		super(new AES(keyLenght, polynomial),new DESEncodingSubstitution(new ExtendedAlphabet()),
+				new DESDecodingSubstitution(new ExtendedAlphabet()));
 		this.keyLenght = keyLenght;
 		this.polynomial = polynomial;
 		aes = new AES(keyLenght, polynomial);
@@ -27,19 +28,19 @@ public class AESCipher extends BlockCryptosystem<BitArray, String, BitArray> {
 
 	@Override
 	public String complete(BitArray key, String message) {
-		StringAlphabet alphabet = (StringAlphabet) encodingSubstitution.getAlphabet();
-		while((message.length() * 6) % blockSize > 0)
+		StringAlphabet alphabet = (StringAlphabet) ((DESEncodingSubstitution)encodingSubstitution).getAlphabet();
+		while((message.length() * 7) % blockSize > 0)
 			message += alphabet.getElement((int)(Math.random() * alphabet.size()));
 		return message;
 	}
 
 	@Override
-	public BitArray[] divide(BitArray key, BitArray message) {
+	public Vector<BitArray> divide(BitArray key, BitArray message) {
 		return BitArrayTools.divide(message.size() / blockSize, message);
 	}
 
 	@Override
-	public BitArray merge(BitArray key, BitArray[] blocks) {
+	public BitArray merge(BitArray key, Vector<BitArray> blocks) {
 		BitArray result = new BitArray("");
 		for(BitArray block: blocks)
 			result.add(block);

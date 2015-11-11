@@ -19,12 +19,14 @@ public class DESCipherTest extends BlockCryptosystemTest<BitArray, String, BitAr
 	@Test
 	public void encodeDecodeTest() {
 		String message = "thisisasimpletest";
+		System.out.println("DES Cipher Test");
+		System.out.println("message: " + message);
 		String output = cryptosystem.encode(key, message);
+		System.out.println("encoding: " + output);
 		assertNotEquals(message, output);
-		System.out.println(output);
 		output = cryptosystem.decode(key, output);
+		System.out.println("decoding: " + output);
 		assertEquals(message, output.substring(0, message.length()));
-		System.out.println(output);
 	}
 
 }

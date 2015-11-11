@@ -3,6 +3,7 @@ package cryptosystem.ciphers.aes;
 import math.XorArithmetic;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
+import unalcol.types.collection.vector.Vector;
 
 public class StateArray {
 	
@@ -83,9 +84,9 @@ public class StateArray {
 	}
 	
 	public void multiplyColumn(BitArray bits, int col) {
-		BitArray[] values = BitArrayTools.divide(nb, bits);
+		Vector<BitArray> values = BitArrayTools.divide(nb, bits);
 		for(int row = 0; row < nb; ++row)
-			matrix[row][col].xor(values[row]);
+			matrix[row][col].xor(values.get(row));
 	}
 
 }

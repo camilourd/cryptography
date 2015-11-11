@@ -20,10 +20,14 @@ public class TripleDESTest extends CryptosystemTest<Pair<BitArray, BitArray>, St
 
 	@Override
 	public void encodeDecodeTest() {
-		String message = "thisisasimpletest";
+		System.out.println("Triple DES test");
+		String message = "thisisa sample message for Tiple DES cipher";
+		System.out.println("message:  " + message);
 		String output = cryptosystem.encode(key, message);
+		System.out.println("encoding: " + output);
 		assertNotEquals(message, output.substring(0, message.length()));
 		output = cryptosystem.decode(key, output);
+		System.out.println("decoding: " + output);
 		assertEquals(message, output.substring(0, message.length()));
 	}
 

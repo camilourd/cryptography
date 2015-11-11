@@ -2,6 +2,7 @@ package tools;
 
 import alphabet.alphabets.HexadecimalAlphabet;
 import unalcol.types.collection.bitarray.BitArray;
+import unalcol.types.collection.vector.Vector;
 
 public class BitArrayTools {
 	
@@ -46,11 +47,11 @@ public class BitArrayTools {
 		return result;
 	}
 
-	public static BitArray[] divide(int n, BitArray values) {
-		BitArray[] parts = new BitArray[n];
+	public static Vector<BitArray> divide(int n, BitArray values) {
+		Vector<BitArray> parts = new Vector<BitArray>();
 		int size = values.size() / n;
 		for(int i = 0; i < n; ++i)
-			parts[i] = values.subBitArray(i * size, (i + 1) * size);
+			parts.add(values.subBitArray(i * size, (i + 1) * size));
 		return parts;
 	}
 	

@@ -1,16 +1,17 @@
 package cryptosystem.ciphers.des;
 
-import alphabet.alphabets.StringAlphabet;
-import substitution.AlphabetSubstitution;
+import alphabet.Alphabet;
+import substitution.SubstitutionFunction;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class StringBitArraySubstitution extends AlphabetSubstitution<String, BitArray> {
+public class DESEncodingSubstitution  implements SubstitutionFunction<String, BitArray> {
 
+	protected Alphabet alphabet;
 	protected int bits = 0;
 	
-	public StringBitArraySubstitution(StringAlphabet alphabet) {
-		super(alphabet);
+	public DESEncodingSubstitution(Alphabet alphabet) {
+		this.alphabet = alphabet;
 		for(int c = 1; c < alphabet.size(); c <<= 1)
 			++bits;
 	}
@@ -25,14 +26,11 @@ public class StringBitArraySubstitution extends AlphabetSubstitution<String, Bit
 
 	@Override
 	public String restore(BitArray value) {
-		String result = "";
-		for(BitArray val: BitArrayTools.divide(value.size() / bits, value))
-			result += alphabet.getElement(BitArrayTools.parseInt(val));
-		return result;
+		return BitArrayTools.toHexString(value);
 	}
-
-	public int getBits() {
-		return bits;
+	
+	public Alphabet getAlphabet() {
+		return alphabet;
 	}
 
 }

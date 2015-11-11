@@ -4,6 +4,7 @@ import alphabet.alphabets.BinaryAlphabet;
 import cryptosystem.Cryptosystem;
 import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
+import unalcol.types.collection.vector.Vector;
 
 public class DES extends Cryptosystem<BitArray, BitArray> {
 	
@@ -121,11 +122,11 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
 			output = IP.substitute(output);
-			BitArray[] parts = BitArrayTools.divide(2, output);
+			Vector<BitArray> parts = BitArrayTools.divide(2, output);
 			for(int i = 0; i < subkeys.length; ++i)
 				calculateNewParts(subkeys, parts, i);
 			swap(parts);
-			output = FP.substitute(join(parts[0], parts[1]));
+			output = FP.substitute(join(parts.get(0), parts.get(1)));
 		}
 		return output;
 	}
@@ -134,11 +135,11 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 		return key.size() == keySize && message.size() == blockSize;
 	}
 
-	private void calculateNewParts(BitArray[] subkeys, BitArray[] parts, int i) {
-		BitArray previous_left = parts[0];
-		parts[0] = parts[1];
-		parts[1] = feistel(parts[1], subkeys[i]);
-		parts[1].xor(previous_left);
+	private void calculateNewParts(BitArray[] subkeys, Vector<BitArray> parts, int i) {
+		BitArray previous_left = parts.get(0);
+		parts.set(0, parts.get(1));
+		parts.set(1, feistel(parts.get(1), subkeys[i]));
+		parts.get(1).xor(previous_left);
 	}
 	
 	public BitArray feistel(BitArray right, BitArray subkey) {
@@ -155,22 +156,22 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 	}
 	
 	private BitArray substitute(BitArray right) {
-		BitArray[] divs = BitArrayTools.divide(S.length, right);
+		Vector<BitArray> divs = BitArrayTools.divide(S.length, right);
 		BitArray result = new BitArray(0, false);
-		for(int i = 0; i < divs.length; ++i) {
-			int f = ((divs[i].get(0))? 2:0) + ((divs[i].get(5))? 1:0);
+		for(int i = 0; i < divs.size(); ++i) {
+			int f = ((divs.get(i).get(0))? 2:0) + ((divs.get(i).get(5))? 1:0);
 			int c = 0;
 			for(int j = 1; j < 5; ++j)
-				c = (c<<1) + ((divs[i].get(j))? 1:0);
+				c = (c<<1) + ((divs.get(i).get(j))? 1:0);
 			result.add(S[i].getEcoding(f, c));
 		}
 		return result;
 	}
 	
-	protected void swap(BitArray[] parts) {
-		BitArray aux = parts[0];
-		parts[0] = parts[1];
-		parts[1] = aux;
+	protected void swap(Vector<BitArray> parts) {
+		BitArray aux = parts.get(0);
+		parts.set(0, parts.get(1));
+		parts.set(1, aux);
 	}
 	
 	protected BitArray join(BitArray left, BitArray right) {
@@ -185,11 +186,11 @@ public class DES extends Cryptosystem<BitArray, BitArray> {
 		if(isFeasible(key, message)) {
 			BitArray[] subkeys = DESGenerator.generateKeys(key);
 			output = FP.restore(output);
-			BitArray[] parts = BitArrayTools.divide(2, output);
+			Vector<BitArray> parts = BitArrayTools.divide(2, output);
 			for(int i = subkeys.length - 1; i >= 0 ; --i)
 				calculateNewParts(subkeys, parts, i);
 			swap(parts);
-			output = IP.restore(join(parts[0], parts[1]));
+			output = IP.restore(join(parts.get(0), parts.get(1)));
 		}
 		return output;
 	}

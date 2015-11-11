@@ -1,16 +1,17 @@
 package cryptosystem;
 
-import substitution.AlphabetSubstitution;
+import substitution.SubstitutionFunction;
+import unalcol.types.collection.vector.Vector;
 
 public abstract class BlockCryptosystem<K, M, B> implements CipherFunction<K, M> {
 	
 	protected Cryptosystem<K, B> cryptosystem;
-	protected AlphabetSubstitution<M, B> encodingSubstitution;
-	protected AlphabetSubstitution<M, B> decodingSubstitution;
+	protected SubstitutionFunction<M, B> encodingSubstitution;
+	protected SubstitutionFunction<M, B> decodingSubstitution;
 	
 	public BlockCryptosystem(Cryptosystem<K, B> cryptosystem,
-			AlphabetSubstitution<M, B> encodingSubstitution,
-			AlphabetSubstitution<M, B> decodingSubstitution) {
+			SubstitutionFunction<M, B> encodingSubstitution,
+			SubstitutionFunction<M, B> decodingSubstitution) {
 		this.cryptosystem = cryptosystem;
 		this.encodingSubstitution = encodingSubstitution;
 		this.decodingSubstitution = decodingSubstitution;
@@ -19,25 +20,25 @@ public abstract class BlockCryptosystem<K, M, B> implements CipherFunction<K, M>
 	@Override
 	public M encode(K key, M message) {
 		if(isValidKey(key)) {
-			B[] blocks = divide(key, encodingSubstitution.substitute(complete(key, message)));
-			for(B block: blocks)
-				block = cryptosystem.encode(key, block);
-			return decodingSubstitution.restore(merge(key, blocks));
+			Vector<B> blocks = divide(key, encodingSubstitution.substitute(complete(key, message)));
+			for(int i = 0; i < blocks.size(); ++i)
+				blocks.set(i, cryptosystem.encode(key, blocks.get(i)));
+			return encodingSubstitution.restore(merge(key, blocks));
 		}
 		return message;
 	}
 	
 	public abstract M complete(K key, M message);
-	public abstract B[] divide(K key, B message);
-	public abstract B merge(K key, B[] blocks);
+	public abstract Vector<B> divide(K key, B message);
+	public abstract B merge(K key, Vector<B> blocks);
 
 	@Override
 	public M decode(K key, M message) {
 		if(isValidKey(key)) {
-			B[] blocks = divide(key, decodingSubstitution.substitute(message));
-			for(B block: blocks)
-				block = cryptosystem.decode(key, block);
-			return encodingSubstitution.restore(merge(key, blocks));
+			Vector<B> blocks = divide(key, decodingSubstitution.substitute(message));
+			for(int i = 0; i < blocks.size(); ++i)
+				blocks.set(i, cryptosystem.decode(key, blocks.get(i)));
+			return decodingSubstitution.restore(merge(key, blocks));
 		}
 		return message;
 	}
