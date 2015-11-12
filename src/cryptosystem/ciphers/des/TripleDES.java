@@ -1,28 +1,28 @@
-package cryptosystem.ciphers;
+package cryptosystem.ciphers.des;
 
-import alphabet.alphabets.ExtendedAlphabet;
+import alphabet.alphabets.BinaryAlphabet;
 import cryptosystem.Cryptosystem;
 import types.Pair;
 import unalcol.types.collection.bitarray.BitArray;
 
-public class TripleDES extends Cryptosystem<Pair<BitArray, BitArray>, String> {
+public class TripleDES extends Cryptosystem<Pair<BitArray, BitArray>, BitArray> {
 
-	protected DESCipher cipher;
+	protected DES cipher;
 	
 	public TripleDES() {
-		super(new ExtendedAlphabet());
-		cipher = new DESCipher();
+		super(new BinaryAlphabet());
+		cipher = new DES();
 	}
-
+	
 	@Override
-	public String encode(Pair<BitArray, BitArray> key, String message) {
+	public BitArray encode(Pair<BitArray, BitArray> key, BitArray message) {
 		if(isValidKey(key))
 			return cipher.encode(key.first, cipher.decode(key.second, cipher.encode(key.first, message)));
 		return message;
 	}
 
 	@Override
-	public String decode(Pair<BitArray, BitArray> key, String message) {
+	public BitArray decode(Pair<BitArray, BitArray> key, BitArray message) {
 		if(isValidKey(key))
 			return cipher.decode(key.first, cipher.encode(key.second, cipher.decode(key.first, message)));
 		return message;
@@ -38,5 +38,5 @@ public class TripleDES extends Cryptosystem<Pair<BitArray, BitArray>, String> {
 		Pair<BitArray, BitArray> key = new Pair<BitArray, BitArray>(cipher.generateKey(), cipher.generateKey());
 		return key;
 	}
-
+	
 }

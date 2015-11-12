@@ -12,7 +12,7 @@ import test.cryptosystem.ciphers.ElGamalCipherTest;
 import test.cryptosystem.ciphers.HillCipherTest;
 import test.cryptosystem.ciphers.RSACipherTest;
 import test.cryptosystem.ciphers.SimpleSubstitutionCipherTest;
-import test.cryptosystem.ciphers.TripleDESTest;
+import test.cryptosystem.ciphers.TripleDESCipherTest;
 import test.cryptosystem.ciphers.VigenereCipherTest;
 import test.cryptosystem.ciphers.aes.AESTest;
 import test.cryptosystem.ciphers.des.DESGeneratorTest;
@@ -26,7 +26,7 @@ import test.math.XorArithmeticTest;
 @SuiteClasses({ AffineCipherTest.class, CaesarCipherTest.class, HillCipherTest.class,
 		SimpleSubstitutionCipherTest.class, VigenereCipherTest.class, SimpleAlphabetTest.class,
 		ArithmeticTest.class, ModularArithmeticTest.class, DESGeneratorTest.class, DESTest.class,
-		TripleDESTest.class, XorArithmeticTest.class, AESTest.class, AESCipherTest.class,
+		TripleDESCipherTest.class, XorArithmeticTest.class, AESTest.class, AESCipherTest.class,
 		RSACipherTest.class, ElGamalTest.class, ElGamalCipherTest.class})
 public class AllTests {
 
