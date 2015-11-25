@@ -39,6 +39,15 @@ public class RSACipherTest extends BlockCryptosystemTest<RSAKey, String, BigInte
 		output = cryptosystem.decode(key, output);
 		System.out.println("decoding: " + output);
 		assertEquals(message, output);
+		
+		message = "thisisjustatest";
+		System.out.println("input:    " + message);
+		output = cryptosystem.encode(key, message);
+		System.out.println("encoding: " + output);
+		assertNotEquals(message, output);
+		output = cryptosystem.decode(key, output);
+		System.out.println("decoding: " + output);
+		assertEquals(message, output);
 	}
 
 }
