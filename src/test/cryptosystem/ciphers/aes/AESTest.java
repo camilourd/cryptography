@@ -2,9 +2,9 @@ package test.cryptosystem.ciphers.aes;
 
 import static org.junit.Assert.*;
 
-import cryptosystem.ciphers.aes.AES;
+import cryptography.cryptosystem.ciphers.aes.AES;
+import cryptography.tools.BitArrayTools;
 import test.cryptosystem.CryptosystemTest;
-import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class AESTest extends CryptosystemTest<BitArray, BitArray> {

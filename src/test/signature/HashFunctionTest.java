@@ -2,7 +2,7 @@ package test.signature;
 
 import org.junit.Test;
 
-import signature.HashFunction;
+import cryptography.signature.HashFunction;
 
 public abstract class HashFunctionTest<K, M> {
 

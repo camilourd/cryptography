@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import alphabet.alphabets.EnglishAlphabet;
-import cryptosystem.ciphers.CaesarCipher;
+import cryptography.alphabet.alphabets.EnglishAlphabet;
+import cryptography.cryptosystem.ciphers.CaesarCipher;
 import test.cryptosystem.CryptosystemTest;
 
 public class CaesarCipherTest extends CryptosystemTest<Integer, String> {

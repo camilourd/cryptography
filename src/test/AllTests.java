@@ -21,13 +21,14 @@ import test.cryptosystem.ciphers.elgamal.ElGamalTest;
 import test.math.ArithmeticTest;
 import test.math.ModularArithmeticTest;
 import test.math.XorArithmeticTest;
+import test.signature.function.sha.SHA256Test;
 
 @RunWith(Suite.class)
 @SuiteClasses({ AffineCipherTest.class, CaesarCipherTest.class, HillCipherTest.class,
 		SimpleSubstitutionCipherTest.class, VigenereCipherTest.class, SimpleAlphabetTest.class,
 		ArithmeticTest.class, ModularArithmeticTest.class, DESGeneratorTest.class, DESTest.class,
 		TripleDESCipherTest.class, XorArithmeticTest.class, AESTest.class, AESCipherTest.class,
-		RSACipherTest.class, ElGamalTest.class, ElGamalCipherTest.class})
+		RSACipherTest.class, ElGamalTest.class, ElGamalCipherTest.class, SHA256Test.class})
 public class AllTests {
 
 }

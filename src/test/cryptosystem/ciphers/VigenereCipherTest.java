@@ -2,8 +2,8 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import alphabet.alphabets.EnglishAlphabet;
-import cryptosystem.ciphers.VigenereCipher;
+import cryptography.alphabet.alphabets.EnglishAlphabet;
+import cryptography.cryptosystem.ciphers.VigenereCipher;
 import test.cryptosystem.CryptosystemTest;
 
 public class VigenereCipherTest extends CryptosystemTest<String, String> {

@@ -2,9 +2,9 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import cryptosystem.ciphers.TripleDESCipher;
+import cryptography.cryptosystem.ciphers.TripleDESCipher;
+import cryptography.types.Pair;
 import test.cryptosystem.BlockCryptosystemTest;
-import types.Pair;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class TripleDESCipherTest extends BlockCryptosystemTest<Pair<BitArray, BitArray>, String, BitArray> {

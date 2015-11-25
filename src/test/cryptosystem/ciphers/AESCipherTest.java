@@ -2,9 +2,9 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import cryptosystem.ciphers.AESCipher;
+import cryptography.cryptosystem.ciphers.AESCipher;
+import cryptography.tools.BitArrayTools;
 import test.cryptosystem.BlockCryptosystemTest;
-import tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class AESCipherTest extends BlockCryptosystemTest<BitArray, String, BitArray> {

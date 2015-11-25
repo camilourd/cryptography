@@ -2,7 +2,7 @@ package test.cryptosystem;
 
 import org.junit.Test;
 
-import cryptosystem.BlockCryptosystem;
+import cryptography.cryptosystem.BlockCryptosystem;
 
 public abstract class BlockCryptosystemTest <K, M, B> {
 

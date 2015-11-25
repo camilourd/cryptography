@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import tools.BitArrayTools;
+import cryptography.tools.BitArrayTools;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class BitArrayToolsTest {

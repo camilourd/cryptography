@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import cryptosystem.ciphers.elgamal.ElGamal;
-import cryptosystem.ciphers.elgamal.key.ElGamalKey;
+import cryptography.cryptosystem.ciphers.elgamal.ElGamal;
+import cryptography.cryptosystem.ciphers.elgamal.key.ElGamalKey;
+import cryptography.tools.MathTools;
+import cryptography.types.Pair;
 import test.cryptosystem.CryptosystemTest;
-import tools.MathTools;
-import types.Pair;
 
 public class ElGamalTest extends CryptosystemTest<ElGamalKey, Pair<BigInteger, BigInteger>> {
 

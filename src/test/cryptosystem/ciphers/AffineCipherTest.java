@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import alphabet.alphabets.EnglishAlphabet;
-import cryptosystem.ciphers.AffineCipher;
-import math.Arithmetic;
+import cryptography.alphabet.alphabets.EnglishAlphabet;
+import cryptography.cryptosystem.ciphers.AffineCipher;
+import cryptography.math.Arithmetic;
+import cryptography.types.Pair;
 import test.cryptosystem.CryptosystemTest;
-import types.Pair;
 
 public class AffineCipherTest extends CryptosystemTest<Pair<Integer, Integer>, String> {
 

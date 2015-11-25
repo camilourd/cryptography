@@ -2,8 +2,8 @@ package test.cryptosystem.ciphers;
 
 import static org.junit.Assert.*;
 
-import alphabet.alphabets.EnglishAlphabet;
-import cryptosystem.ciphers.HillCipher;
+import cryptography.alphabet.alphabets.EnglishAlphabet;
+import cryptography.cryptosystem.ciphers.HillCipher;
 import flanagan.math.Matrix;
 import test.cryptosystem.CryptosystemTest;
 

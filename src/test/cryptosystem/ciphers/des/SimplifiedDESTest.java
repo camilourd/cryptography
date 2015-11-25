@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import cryptosystem.ciphers.des.SimplifiedDES;
+import cryptography.cryptosystem.ciphers.des.SimplifiedDES;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class SimplifiedDESTest {

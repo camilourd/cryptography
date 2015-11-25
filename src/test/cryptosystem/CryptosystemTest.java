@@ -2,8 +2,8 @@ package test.cryptosystem;
 
 import org.junit.Test;
 
-import alphabet.Alphabet;
-import cryptosystem.Cryptosystem;
+import cryptography.alphabet.Alphabet;
+import cryptography.cryptosystem.Cryptosystem;
 
 public abstract class CryptosystemTest<K, M> {
 

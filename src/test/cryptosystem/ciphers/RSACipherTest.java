@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import cryptosystem.ciphers.RSACipher;
-import cryptosystem.ciphers.rsa.key.RSAKey;
+import cryptography.cryptosystem.ciphers.RSACipher;
+import cryptography.cryptosystem.ciphers.rsa.key.RSAKey;
 import test.cryptosystem.BlockCryptosystemTest;
 
 public class RSACipherTest extends BlockCryptosystemTest<RSAKey, String, BigInteger> {

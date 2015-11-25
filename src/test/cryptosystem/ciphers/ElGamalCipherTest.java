@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import cryptosystem.ciphers.ElGamalCipher;
-import cryptosystem.ciphers.elgamal.key.ElGamalKey;
+import cryptography.cryptosystem.ciphers.ElGamalCipher;
+import cryptography.cryptosystem.ciphers.elgamal.key.ElGamalKey;
+import cryptography.types.Pair;
 import test.cryptosystem.BlockCryptosystemTest;
-import types.Pair;
 
 public class ElGamalCipherTest extends BlockCryptosystemTest <ElGamalKey, String, Pair<BigInteger, BigInteger>> {
 

@@ -2,7 +2,7 @@ package test.cryptosystem.ciphers.des;
 
 import static org.junit.Assert.*;
 
-import cryptosystem.ciphers.des.DES;
+import cryptography.cryptosystem.ciphers.des.DES;
 import test.cryptosystem.CryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;
 

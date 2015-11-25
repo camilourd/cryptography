@@ -3,7 +3,8 @@ package test.alphabet;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import alphabet.alphabets.StringAlphabet;
+
+import cryptography.alphabet.alphabets.StringAlphabet;
 
 public class SimpleAlphabetTest {
 

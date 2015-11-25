@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 
-import alphabet.alphabets.EnglishAlphabet;
-import cryptosystem.ciphers.SimpleSubstitutionCipher;
-import substitution.Substitution;
+import cryptography.alphabet.alphabets.EnglishAlphabet;
+import cryptography.cryptosystem.ciphers.SimpleSubstitutionCipher;
+import cryptography.substitution.Substitution;
 import test.cryptosystem.CryptosystemTest;
 
 public class SimpleSubstitutionCipherTest extends CryptosystemTest<Substitution<Character, Character>, String> {

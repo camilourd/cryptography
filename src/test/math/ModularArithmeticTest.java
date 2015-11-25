@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import math.ModularArithmetic;
+import cryptography.math.ModularArithmetic;
 
 public class ModularArithmeticTest {
 

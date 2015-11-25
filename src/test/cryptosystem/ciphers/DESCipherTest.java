@@ -1,9 +1,11 @@
 package test.cryptosystem.ciphers;
 
 import org.junit.Test;
+
+import cryptography.cryptosystem.ciphers.DESCipher;
+
 import static org.junit.Assert.*;
 
-import cryptosystem.ciphers.DESCipher;
 import test.cryptosystem.BlockCryptosystemTest;
 import unalcol.types.collection.bitarray.BitArray;
 

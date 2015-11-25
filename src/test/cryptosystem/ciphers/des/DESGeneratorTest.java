@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import cryptosystem.ciphers.des.DESGenerator;
+import cryptography.cryptosystem.ciphers.des.DESGenerator;
 import unalcol.types.collection.bitarray.BitArray;
 
 public class DESGeneratorTest {
